@@ -26,7 +26,8 @@
         "depth": 3
       }
     ],
-    "no-shadow": ["error", { "allow": ["logout"] }],
-    "react/jsx-curly-newline": "off"
+    "no-shadow": ["error", { "allow": ["logout", "getCurrentProfile"] }],
+    "react/jsx-curly-newline": "off",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   }
 }
