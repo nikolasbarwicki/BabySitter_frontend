@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/auth';
 
-const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navigation = ({ isAuthenticated, loading, logout }) => {
   const authLinks = (
     <div className="btn-group">
       <button
@@ -83,16 +83,13 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navigation.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.objectOf(PropTypes.object).isRequired,
-  }).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { logout })(Navigation);

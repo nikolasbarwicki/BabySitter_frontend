@@ -26,6 +26,7 @@
         "depth": 3
       }
     ],
-    "no-shadow": ["error", { "allow": ["logout"] }]
+    "no-shadow": ["error", { "allow": ["logout"] }],
+    "react/jsx-curly-newline": "off"
   }
 }
