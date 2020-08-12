@@ -25,6 +25,7 @@
         "controlComponents": ["CustomInput"],
         "depth": 3
       }
-    ]
+    ],
+    "no-shadow": ["error", { "allow": ["logout"] }]
   }
 }

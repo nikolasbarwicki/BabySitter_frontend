@@ -1,72 +1,98 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../actions/auth';
 
-const Navigation = () => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <div className="container-fluid">
-      <Link className="navbar-brand" to="/">
-        YourBabySitter
-      </Link>
+const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const authLinks = (
+    <div className="btn-group">
       <button
-        className="navbar-toggler"
         type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
+        className="btn btn-secondary dropdown-toggle"
+        data-toggle="dropdown"
       >
-        <span className="navbar-toggler-icon" />
+        Dashboard
       </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <Link className="nav-link" to="/sitters">
-              Babysitter wanted
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/jobs">
-              Babysitting jobs
-            </Link>
-          </li>
-        </ul>
-        <ul className="navbar-nav mb-2 mb-lg-0">
-          <li className="nav-item mr-2">
-            <Link to="/register" className="btn btn-primary">
-              Sign up
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/login" className="btn btn-secondary">
-              Log in
-            </Link>
-          </li>
-        </ul>
-        {/* <div className="btn-group">
-          <button
-            type="button"
-            className="btn btn-secondary dropdown-toggle"
-            data-toggle="dropdown"
-          >
-            Dashboard
+      <ul className="dropdown-menu dropdown-menu-right">
+        <li>
+          <button className="dropdown-item" type="button">
+            Edit profile
           </button>
-          <ul className="dropdown-menu dropdown-menu-right">
-            <li>
-              <button className="dropdown-item" type="button">
-                Edit profile
-              </button>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li>
+          <button onClick={logout} className="dropdown-item" type="button">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+
+  const guestLinks = (
+    <ul className="navbar-nav mb-2 mb-lg-0">
+      <li className="nav-item mr-2">
+        <Link to="/register" className="btn btn-primary">
+          Sign up
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/login" className="btn btn-secondary">
+          Log in
+        </Link>
+      </li>
+    </ul>
+  );
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          YourBabySitter
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" to="/sitters">
+                Babysitter wanted
+              </Link>
             </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <button className="dropdown-item" type="button">
-                Logout
-              </button>
+            <li className="nav-item">
+              <Link className="nav-link" to="/jobs">
+                Babysitting jobs
+              </Link>
             </li>
           </ul>
-        </div> */}
+          {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+        </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
 
-export default Navigation;
+Navigation.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.objectOf(PropTypes.object).isRequired,
+  }).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Navigation);
