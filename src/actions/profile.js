@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROFILE, PROFILE_ERROR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from './types';
 
 // Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
@@ -88,5 +88,24 @@ export const editProfile = (formData, history, id) => async (dispatch) => {
     if (errors) {
       errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
     }
+  }
+};
+
+// Delete profile
+export const deleteProfile = () => async (dispatch) => {
+  try {
+    const res = await axios.delete('/api/sitters/user');
+
+    dispatch({ type: CLEAR_PROFILE });
+
+    dispatch(setAlert(res.data.msg, 'success'));
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
   }
 };

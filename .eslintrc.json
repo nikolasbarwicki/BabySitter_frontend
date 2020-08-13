@@ -29,7 +29,13 @@
     "no-shadow": [
       "error",
       {
-        "allow": ["logout", "getCurrentProfile", "createProfile", "editProfile"]
+        "allow": [
+          "logout",
+          "getCurrentProfile",
+          "createProfile",
+          "editProfile",
+          "deleteProfile"
+        ]
       }
     ],
     "react/jsx-curly-newline": "off",
