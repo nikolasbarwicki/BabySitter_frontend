@@ -8,13 +8,13 @@ const Dashboard = ({
   getCurrentProfile,
   deleteProfile,
   profile,
-  user: { role, name },
+  user: { name },
   userLoading,
   profileLoading,
 }) => {
   useEffect(() => {
-    !userLoading && getCurrentProfile(role);
-  }, [userLoading]);
+    !userLoading && getCurrentProfile();
+  }, [userLoading, getCurrentProfile]);
 
   return (
     <div className="container">
