@@ -16,9 +16,9 @@ const Navigation = ({ isAuthenticated, loading, logout }) => {
       </button>
       <ul className="dropdown-menu dropdown-menu-right">
         <li>
-          <button className="dropdown-item" type="button">
+          <Link to="/edit-profile" className="dropdown-item">
             Edit profile
-          </button>
+          </Link>
         </li>
         <li>
           <hr className="dropdown-divider" />
