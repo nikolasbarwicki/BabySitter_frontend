@@ -35,11 +35,16 @@ const Dashboard = ({
                     You have not yet setup a profile, please add some info
                   </h6>
                   <Link to="/edit-profile" className="btn btn-primary">
-                    Edit profile
+                    Create profile
                   </Link>
                 </>
               ) : (
-                <h4>Has profile</h4>
+                <>
+                  <h4>Has profile</h4>
+                  <Link to="/edit-profile" className="btn btn-primary">
+                    Edit profile
+                  </Link>
+                </>
               )}
             </>
           )}

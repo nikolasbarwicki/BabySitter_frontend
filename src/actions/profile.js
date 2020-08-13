@@ -3,22 +3,13 @@ import { setAlert } from './alert';
 import { GET_PROFILE, PROFILE_ERROR } from './types';
 
 // Get current users profile
-// eslint-disable-next-line import/prefer-default-export
-export const getCurrentProfile = (role) => async (dispatch) => {
+export const getCurrentProfile = () => async (dispatch) => {
   try {
-    if (role === 'sitter') {
-      const res = await axios.get(`/api/sitters/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    } else {
-      const res = await axios.get(`/api/jobs/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    }
+    const res = await axios.get(`/api/sitters/me`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,
@@ -30,10 +21,8 @@ export const getCurrentProfile = (role) => async (dispatch) => {
   }
 };
 
-// Create or update profile
-export const createProfile = (formData, history, role, edit = false) => async (
-  dispatch,
-) => {
+// Create profile
+export const createProfile = (formData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -47,11 +36,44 @@ export const createProfile = (formData, history, role, edit = false) => async (
       type: GET_PROFILE,
       payload: res.data,
     });
-    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
+    dispatch(setAlert('Profile Created', 'success'));
 
-    if (!edit) {
-      history.push('/dashboard');
+    history.push('/dashboard');
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+
+    const { errors } = error.response.data;
+
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
     }
+  }
+};
+
+// Edit profile
+export const editProfile = (formData, history, id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(`/api/sitters/${id}`, formData, config);
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+    dispatch(setAlert('Profile Updated', 'success'));
+
+    history.push('/dashboard');
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,

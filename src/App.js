@@ -13,6 +13,7 @@ import Login from './components/auth/Login';
 import Alert from './components/Alert';
 import Dashboard from './components/Dashboard';
 import EditProfile from './components/EditProfile';
+import CreateProfile from './components/CreateProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 if (localStorage.token) {
@@ -35,6 +36,11 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
         </Switch>
       </Router>
     </Provider>

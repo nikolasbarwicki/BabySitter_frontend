@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import { editProfile, getCurrentProfile } from '../actions/profile';
+import { createProfile } from '../actions/profile';
 
-const EditProfile = ({
-  profile: { profile, loading },
-  editProfile,
-  getCurrentProfile,
-  history,
-}) => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     address: '',
     dateOfBirth: '',
@@ -34,70 +28,6 @@ const EditProfile = ({
     contactPhone: '',
     contactEmail: '',
   });
-
-  useEffect(() => {
-    getCurrentProfile();
-
-    setFormData({
-      address:
-        loading || !profile.location
-          ? ''
-          : `${profile.location.city} ${profile.location.street}`,
-      dateOfBirth:
-        loading || !profile.dateOfBirth
-          ? ''
-          : moment(profile.dateOfBirth).format('yyyy-MM-DD'),
-      description: loading || !profile.description ? '' : profile.description,
-      experience: loading || !profile.experience ? '' : profile.experience,
-      baby:
-        loading || !profile.experienceAges.baby
-          ? false
-          : profile.experienceAges.baby,
-      toddler:
-        loading || !profile.experienceAges.toddler
-          ? false
-          : profile.experienceAges.toddler,
-      preschooler:
-        loading || !profile.experienceAges.preschooler
-          ? false
-          : profile.experienceAges.preschooler,
-      gradeschooler:
-        loading || !profile.experienceAges.gradeschooler
-          ? false
-          : profile.experienceAges.gradeschooler,
-      teenager:
-        loading || !profile.experienceAges.teenager
-          ? false
-          : profile.experienceAges.teenager,
-      hourlyRate: loading || !profile.hourlyRate ? 0 : profile.hourlyRate,
-      crafting:
-        loading || !profile.skills.crafting ? false : profile.skills.crafting,
-      drawing:
-        loading || !profile.skills.drawing ? false : profile.skills.drawing,
-      reading:
-        loading || !profile.skills.reading ? false : profile.skills.reading,
-      music: loading || !profile.skills.music ? false : profile.skills.music,
-      language:
-        loading || !profile.skills.language ? false : profile.skills.language,
-      games: loading || !profile.skills.games ? false : profile.skills.games,
-      pets:
-        loading || !profile.comfortableWith.pets
-          ? false
-          : profile.comfortableWith.pets,
-      cooking:
-        loading || !profile.comfortableWith.cooking
-          ? false
-          : profile.comfortableWith.cooking,
-      chores:
-        loading || !profile.comfortableWith.chores
-          ? false
-          : profile.comfortableWith.chores,
-      contactPhone:
-        loading || !profile.contactPhone ? '' : profile.contactPhone,
-      contactEmail:
-        loading || !profile.contactEmail ? '' : profile.contactEmail,
-    });
-  }, [loading]);
 
   const {
     address,
@@ -131,8 +61,7 @@ const EditProfile = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-underscore-dangle
-    editProfile(formData, history, profile._id);
+    createProfile(formData, history);
   };
 
   return (
@@ -460,7 +389,7 @@ const EditProfile = ({
               </div>
             </div>
             <button type="submit" className="btn btn-primary btn-lg mt-4 mb-4">
-              Update profile
+              Create profile
             </button>
           </form>
         </div>
@@ -469,36 +398,11 @@ const EditProfile = ({
   );
 };
 
-EditProfile.propTypes = {
-  editProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  profile: PropTypes.shape({
-    profile: PropTypes.oneOfType([
-      PropTypes.objectOf(
-        PropTypes.oneOfType([
-          PropTypes.bool,
-          PropTypes.number,
-          PropTypes.string,
-        ]),
-      ),
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    loading: PropTypes.bool.isRequired,
-  }),
 };
 
-EditProfile.defaultProps = {
-  profile: { profile: {} },
-};
-
-const mapStateToProps = (state) => ({
-  profile: state.profile,
-});
-
-export default connect(mapStateToProps, { editProfile, getCurrentProfile })(
-  withRouter(EditProfile),
-);
+export default connect(null, { createProfile })(withRouter(CreateProfile));

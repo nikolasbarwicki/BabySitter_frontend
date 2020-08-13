@@ -28,7 +28,9 @@
     ],
     "no-shadow": [
       "error",
-      { "allow": ["logout", "getCurrentProfile", "createProfile"] }
+      {
+        "allow": ["logout", "getCurrentProfile", "createProfile", "editProfile"]
+      }
     ],
     "react/jsx-curly-newline": "off",
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
