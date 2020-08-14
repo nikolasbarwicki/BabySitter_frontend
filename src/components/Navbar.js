@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/auth';
 
-const Navigation = ({ isAuthenticated, loading, logout }) => {
+const Navigation = ({ isAuthenticated, loading, logout, name }) => {
   const authLinks = (
     <div className="btn-group">
       <button
@@ -12,12 +12,12 @@ const Navigation = ({ isAuthenticated, loading, logout }) => {
         className="btn btn-secondary dropdown-toggle"
         data-toggle="dropdown"
       >
-        Dashboard
+        Hi, {name}{' '}
       </button>
       <ul className="dropdown-menu dropdown-menu-right">
         <li>
-          <Link to="/edit-profile" className="dropdown-item">
-            Edit profile
+          <Link to="/dashboard" className="dropdown-item">
+            Dashboard
           </Link>
         </li>
         <li>
@@ -25,7 +25,7 @@ const Navigation = ({ isAuthenticated, loading, logout }) => {
         </li>
         <li>
           <button onClick={logout} className="dropdown-item" type="button">
-            Logout
+            Sign Out
           </button>
         </li>
       </ul>
@@ -64,14 +64,18 @@ const Navigation = ({ isAuthenticated, loading, logout }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/sitters">
+              <NavLink
+                activeClassName="active"
+                className="nav-link"
+                to="/sitters"
+              >
                 Babysitter wanted
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/jobs">
+              <NavLink activeClassName="active" className="nav-link" to="/jobs">
                 Babysitting jobs
-              </Link>
+              </NavLink>
             </li>
           </ul>
           {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
@@ -85,9 +89,11 @@ Navigation.propTypes = {
   logout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  name: state.auth.user.name,
   isAuthenticated: state.auth.isAuthenticated,
   loading: state.auth.loading,
 });
