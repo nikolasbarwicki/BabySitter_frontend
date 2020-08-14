@@ -38,13 +38,13 @@ export const getProfiles = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
-      },
-    });
+    // dispatch({
+    //   type: PROFILE_ERROR,
+    //   payload: {
+    //     msg: error.response.statusText,
+    //     status: error.response.status,
+    //   },
+    // });
   }
 };
 

@@ -75,8 +75,8 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
       'comfortableWith.pets': pets,
       'comfortableWith.cooking': cooking,
       'comfortableWith.chores': chores,
-      minAge,
-      maxAge,
+      'age[gte]': minAge,
+      'age[lte]': maxAge,
       sort,
       'hourlyRate[lte]': maxHourlyRate,
     };
@@ -132,8 +132,8 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
         </div>
         <div className="row g-3">
           <div className="col-sm-6">
-            <label htmlFor="inputEmail4" className="form-label text-danger">
-              not working yet
+            <label htmlFor="inputEmail4" className="form-label">
+              Minimum age
             </label>
             <input
               type="text"
@@ -146,8 +146,8 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
           </div>
 
           <div className="col-sm-6">
-            <label htmlFor="inputEmail4" className="form-label text-danger">
-              not working yet
+            <label htmlFor="inputEmail4" className="form-label">
+              Maximum age
             </label>
             <input
               type="text"

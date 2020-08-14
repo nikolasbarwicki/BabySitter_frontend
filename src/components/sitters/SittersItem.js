@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 
-const SittersItem = ({ name, dateOfBirth, city, desc, id }) => {
+const SittersItem = ({ name, age, city, desc, id }) => {
   return (
     <div className="card mb-4">
       <div className="row g-0">
@@ -19,10 +19,15 @@ const SittersItem = ({ name, dateOfBirth, city, desc, id }) => {
         <div className="col-md-9">
           <div className="card-body">
             <h5 className="card-title">
-              {name}, {moment().diff(dateOfBirth, 'years')}
+              {name}, {age}
             </h5>
             <h6 className="card-subtitle mb-2 text-muted">Babysitter {city}</h6>
-            <p className="card-text">{desc}</p>
+            <p className="card-text">
+              {_.truncate(desc, {
+                length: 120,
+                separator: ' ',
+              })}
+            </p>
             <Link to={`/sitters/${id}`} className="stretched-link" />
           </div>
         </div>
@@ -33,7 +38,7 @@ const SittersItem = ({ name, dateOfBirth, city, desc, id }) => {
 
 SittersItem.propTypes = {
   name: PropTypes.string.isRequired,
-  dateOfBirth: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
