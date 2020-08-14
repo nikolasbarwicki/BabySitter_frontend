@@ -17,6 +17,7 @@ import CreateProfile from './components/CreateProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 import SittersList from './components/sitters/SittersList';
 import SittersProfile from './components/sitters/SittersProfile';
+import NotFound from './components/NotFound';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -45,6 +46,7 @@ const App = () => {
             path="/create-profile"
             component={CreateProfile}
           />
+          <Route path="/" component={NotFound} />
         </Switch>
       </Router>
     </Provider>
