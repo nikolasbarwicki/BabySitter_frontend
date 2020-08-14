@@ -36,7 +36,7 @@ const SittersList = ({ getProfiles, profile: { profiles, loading } }) => {
                 profiles.data.map((sitter) => (
                   <SittersItem
                     key={sitter._id}
-                    id={sitter._id}
+                    id={sitter.user._id}
                     name={sitter.user.name}
                     dateOfBirth={sitter.dateOfBirth}
                     city={sitter.location.city}
