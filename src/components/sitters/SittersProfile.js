@@ -44,6 +44,16 @@ const SittersProfile = ({
                 <li className="breadcrumb-item">
                   <Link to="/sitters">Babysitter</Link>
                 </li>
+                <li className="breadcrumb-item">
+                  <Link
+                    to={{
+                      pathname: '/sitters',
+                      search: `?location.city=${profile.location.city}`,
+                    }}
+                  >
+                    {profile.location.city}
+                  </Link>
+                </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   {profile.user.name}
                 </li>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getFilteredProfiles } from '../../actions/profile';
 
-const SittersFilter = ({ getFilteredProfiles }) => {
+const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
   const [formData, setFormData] = useState({
     city: null,
     minAge: null,
@@ -84,6 +86,11 @@ const SittersFilter = ({ getFilteredProfiles }) => {
         delete query[key];
       }
     }
+
+    push({
+      pathname: '/sitters',
+      search: queryString.stringify(query),
+    });
 
     getFilteredProfiles(query);
   };
@@ -384,6 +391,11 @@ const SittersFilter = ({ getFilteredProfiles }) => {
 
 SittersFilter.propTypes = {
   getFilteredProfiles: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default connect(null, { getFilteredProfiles })(SittersFilter);
+export default connect(null, { getFilteredProfiles })(
+  withRouter(SittersFilter),
+);

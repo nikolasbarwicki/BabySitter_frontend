@@ -1,13 +1,23 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import SittersFilter from './SittersFilter';
 import SittersItem from './SittersItem';
-import { getProfiles } from '../../actions/profile';
+import { getProfiles, getFilteredProfiles } from '../../actions/profile';
 
-const SittersList = ({ getProfiles, profile: { profiles, loading } }) => {
+const SittersList = ({
+  getProfiles,
+  getFilteredProfiles,
+  profile: { profiles, loading },
+  location: { search },
+}) => {
   useEffect(() => {
-    getProfiles();
+    if (search) {
+      getFilteredProfiles(queryString.parse(search));
+    } else {
+      getProfiles();
+    }
   }, [getProfiles]);
 
   return (
@@ -67,10 +77,16 @@ SittersList.propTypes = {
     }).isRequired,
   }).isRequired,
   getProfiles: PropTypes.func.isRequired,
+  getFilteredProfiles: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfiles })(SittersList);
+export default connect(mapStateToProps, { getProfiles, getFilteredProfiles })(
+  SittersList,
+);

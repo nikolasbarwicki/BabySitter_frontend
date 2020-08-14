@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const Landing = ({ isAuthenticated }) => {
+  const [query, setQuery] = useState('');
+
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
@@ -14,8 +16,21 @@ const Landing = ({ isAuthenticated }) => {
         <div className="col col-lg-3 d-flex flex-column justify-content-center">
           <h5 className="mb-3 text-center">Quickly find a babysitter</h5>
           <div className="input-group">
-            <input type="text" className="form-control" placeholder="City" />
-            <button className="btn btn-outline-secondary" type="button">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="City"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <Link
+              to={{
+                pathname: '/sitters',
+                search: `?location.city=${query}`,
+              }}
+              className="btn btn-outline-secondary"
+              type="button"
+            >
               <svg
                 width="1.2em"
                 height="1.2em"
@@ -33,7 +48,7 @@ const Landing = ({ isAuthenticated }) => {
                   d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
                 />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
         <div className="col col-lg-3 d-flex flex-column justify-content-center">
