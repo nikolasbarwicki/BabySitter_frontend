@@ -30,7 +30,10 @@
       "error",
       {
         "allow": [
+          "login",
           "logout",
+          "setAlert",
+          "register",
           "getCurrentProfile",
           "createProfile",
           "editProfile",

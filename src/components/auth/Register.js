@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import FormInput from '../FormInput';
 
-const Register = ({ isAuthenticated, ...props }) => {
+const Register = ({ isAuthenticated, setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -23,13 +24,12 @@ const Register = ({ isAuthenticated, ...props }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert('Passwords do not match', 'danger');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      props.register({ name, surname, email, role, password });
+      register({ name, surname, email, role, password });
     }
   };
 
-  // Redirect if logged in
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
@@ -44,12 +44,7 @@ const Register = ({ isAuthenticated, ...props }) => {
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="row mb-3">
                 <div className="col">
-                  <label htmlFor="firstName" className="form-label">
-                    First name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
+                  <FormInput
                     id="name"
                     placeholder="First name"
                     value={name}
@@ -57,12 +52,7 @@ const Register = ({ isAuthenticated, ...props }) => {
                   />
                 </div>
                 <div className="col">
-                  <label htmlFor="firstName" className="form-label">
-                    Surname
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
+                  <FormInput
                     id="surname"
                     placeholder="Surname"
                     value={surname}
@@ -72,13 +62,9 @@ const Register = ({ isAuthenticated, ...props }) => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
+                <FormInput
                   id="email"
+                  type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => onChange(e)}
@@ -100,26 +86,18 @@ const Register = ({ isAuthenticated, ...props }) => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
+                <FormInput
                   id="password"
+                  type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => onChange(e)}
                 />
               </div>
-              <div className="mb-3">
-                <label htmlFor="password2" className="form-label">
-                  Repeat password
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
+              <div className="mb-5">
+                <FormInput
                   id="password2"
+                  type="password"
                   placeholder="Repeat password"
                   value={password2}
                   onChange={(e) => onChange(e)}
