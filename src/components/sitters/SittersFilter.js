@@ -8,6 +8,7 @@ import { getFilteredProfiles } from '../../actions/profile';
 const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
   const [formData, setFormData] = useState({
     city: null,
+    radius: null,
     minAge: null,
     maxAge: null,
     baby: null,
@@ -30,6 +31,7 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
 
   const {
     city,
+    radius,
     minAge,
     maxAge,
     baby,
@@ -60,7 +62,8 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
     e.preventDefault();
 
     const query = {
-      'location.city': city,
+      city,
+      radius,
       'experienceAges.baby': baby,
       'experienceAges.toddler': toddler,
       'experienceAges.preschooler': preschooler,
@@ -115,13 +118,16 @@ const SittersFilter = ({ getFilteredProfiles, history: { push } }) => {
           </div>
 
           <div className="col-sm-6">
-            <label htmlFor="inputEmail4" className="form-label text-danger">
-              not working yet
+            <label htmlFor="radius" className="form-label">
+              Distance
             </label>
-            <select className="form-select">
-              <option defaultValue value="5">
-                5 km
-              </option>
+            <select
+              className="form-select"
+              id="radius"
+              value={radius}
+              onChange={(e) => onChange(e)}
+            >
+              <option value="">Set radius</option>
               <option value="10">10 km</option>
               <option value="20">20 km</option>
               <option value="50">50 km</option>
