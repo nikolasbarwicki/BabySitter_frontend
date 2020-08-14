@@ -36,13 +36,15 @@
           "editProfile",
           "deleteProfile",
           "getProfiles",
-          "getProfileById"
+          "getProfileById",
+          "getFilteredProfiles"
         ]
       }
     ],
     "react/jsx-curly-newline": "off",
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "react/jsx-one-expression-per-line": "off",
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "no-restricted-syntax": "off"
   }
 }

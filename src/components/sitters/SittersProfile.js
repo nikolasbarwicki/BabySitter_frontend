@@ -41,15 +41,11 @@ const SittersProfile = ({
           <div className="row">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
-                {/* TODO: Add reactive breadcrumbs link */}
                 <li className="breadcrumb-item">
-                  <Link to="/dashboard">Babysitter</Link>
-                </li>
-                <li className="breadcrumb-item">
-                  <Link to="/dashboard">Wrocław</Link>
+                  <Link to="/sitters">Babysitter</Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  Nikolas
+                  {profile.user.name}
                 </li>
               </ol>
             </nav>
