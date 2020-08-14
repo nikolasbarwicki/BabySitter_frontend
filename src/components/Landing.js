@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Landing = ({ isAuthenticated }) => {
+const Landing = ({ isAuthenticated, history: { push } }) => {
   const [query, setQuery] = useState('');
 
   if (isAuthenticated) {
@@ -15,22 +15,25 @@ const Landing = ({ isAuthenticated }) => {
       <div className="row justify-content-md-center align-items-center vh-100">
         <div className="col col-lg-3 d-flex flex-column justify-content-center">
           <h5 className="mb-3 text-center">Quickly find a babysitter</h5>
-          <div className="input-group">
+          <form
+            className="input-group"
+            onSubmit={(e) => {
+              e.preventDefault();
+              push({
+                pathname: '/sitters',
+                search: `?city=${query}`,
+              });
+            }}
+          >
             <input
               type="text"
               className="form-control"
-              placeholder="City"
+              placeholder="Enter city"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              required
             />
-            <Link
-              to={{
-                pathname: '/sitters',
-                search: `?location.city=${query}`,
-              }}
-              className="btn btn-outline-secondary"
-              type="button"
-            >
+            <button className="btn btn-outline-secondary" type="submit">
               <svg
                 width="1.2em"
                 height="1.2em"
@@ -48,8 +51,8 @@ const Landing = ({ isAuthenticated }) => {
                   d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
                 />
               </svg>
-            </Link>
-          </div>
+            </button>
+          </form>
         </div>
         <div className="col col-lg-3 d-flex flex-column justify-content-center">
           <h5 className="mb-3 text-center">Looking far a babysitting job?</h5>
@@ -64,6 +67,9 @@ const Landing = ({ isAuthenticated }) => {
 
 Landing.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
