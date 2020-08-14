@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 const Alert = ({ alerts }) =>
   alerts !== null &&
   alerts.length > 0 && (
-    <div className="mt-5 container col-12 col-md-8 col-lg-6 col-xl-4 d-flex flex-column justify-content-center">
+    <div className="container fixed-bottom mb-5 d-flex flex-column justify-content-center">
       {alerts.map((alert) => (
         <div
           key={alert.id}
-          className={`alert alert-${alert.alertType} col-12`}
+          className={`mx-auto shadow alert alert-${alert.alertType} col-12 col-sm-8 col-md-6 alert-dismissible fade show`}
           role="alert"
         >
           {alert.message}
