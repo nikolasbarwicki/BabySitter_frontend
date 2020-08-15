@@ -112,11 +112,11 @@ const CreateParentProfile = ({ createParentProfile, history }) => {
             <div className="card p-4 mt-4">
               <h5 className="mb-3">About us</h5>
               <div className="mb-3">
-                <label htmlFor=" numberOfChildren" className="form-label">
+                <label htmlFor="numberOfChildren" className="form-label">
                   Number of children
                 </label>
                 <select
-                  id=" numberOfChildren"
+                  id="numberOfChildren"
                   className="form-select"
                   value={numberOfChildren}
                   onChange={(e) => onChange(e)}

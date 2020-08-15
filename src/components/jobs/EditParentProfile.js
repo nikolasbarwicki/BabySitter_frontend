@@ -30,6 +30,7 @@ const EditParentProfile = ({
 
   useEffect(() => {
     getCurrentProfile('parent');
+    console.log('got profile');
 
     setFormData({
       address:

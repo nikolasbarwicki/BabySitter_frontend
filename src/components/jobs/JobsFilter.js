@@ -57,7 +57,7 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
       'comfortableWith.cooking': cooking,
       'comfortableWith.chores': chores,
       sort,
-      'hourlyRate[lte]': minHourlyRate,
+      'hourlyRate[gte]': minHourlyRate,
     };
 
     for (const key of Object.keys(query)) {
