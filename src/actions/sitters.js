@@ -2,59 +2,21 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_PROFILE,
-  GET_PROFILES,
+  GET_SITTERS,
+  GET_SITTER,
   PROFILE_ERROR,
   CLEAR_PROFILE,
 } from './types';
 
-// Get current users profile
-export const getCurrentProfile = (role) => async (dispatch) => {
-  if (role === 'sitter') {
-    try {
-      const res = await axios.get(`/api/sitters/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    }
-  }
-
-  if (role === 'parent') {
-    try {
-      const res = await axios.get(`/api/jobs/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    }
-  }
-};
-
-// Get all profiles
-export const getProfiles = () => async (dispatch) => {
+// Get all sitters
+export const getSitters = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
 
   try {
     const res = await axios.get(`/api/sitters`);
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_SITTERS,
       payload: res.data,
     });
   } catch (error) {
@@ -68,8 +30,8 @@ export const getProfiles = () => async (dispatch) => {
   }
 };
 
-// Get all profiles with query params
-export const getFilteredProfiles = (query) => async (dispatch) => {
+// Get all sitters with query params
+export const getFilteredSitters = (query) => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
 
   try {
@@ -78,7 +40,7 @@ export const getFilteredProfiles = (query) => async (dispatch) => {
     });
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_SITTERS,
       payload: res.data,
     });
   } catch (error) {
@@ -92,13 +54,13 @@ export const getFilteredProfiles = (query) => async (dispatch) => {
   }
 };
 
-// Get profile by ID
-export const getProfileById = (userId) => async (dispatch) => {
+// Get sitter by ID
+export const getSitterById = (userId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/sitters/user/${userId}`);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_SITTER,
       payload: res.data,
     });
   } catch (error) {
@@ -113,7 +75,7 @@ export const getProfileById = (userId) => async (dispatch) => {
 };
 
 // Create profile
-export const createProfile = (formData, history) => async (dispatch) => {
+export const createSitterProfile = (formData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -147,8 +109,10 @@ export const createProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-// Edit profile
-export const editProfile = (formData, history, id) => async (dispatch) => {
+// Edit sitters profile
+export const editSitterProfile = (formData, history, id) => async (
+  dispatch,
+) => {
   try {
     const config = {
       headers: {
@@ -182,8 +146,8 @@ export const editProfile = (formData, history, id) => async (dispatch) => {
   }
 };
 
-// Delete profile
-export const deleteProfile = () => async (dispatch) => {
+// Delete sitter profile
+export const deleteSitterProfile = () => async (dispatch) => {
   try {
     const res = await axios.delete('/api/sitters/user');
 

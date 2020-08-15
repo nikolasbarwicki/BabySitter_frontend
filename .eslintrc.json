@@ -40,7 +40,18 @@
           "deleteProfile",
           "getProfiles",
           "getProfileById",
-          "getFilteredProfiles"
+          "getFilteredProfiles",
+          "deleteParentProfile",
+          "createParentProfile",
+          "editParentProfile",
+          "getFilteredJobs",
+          "getJobs",
+          "editSitterProfile",
+          "getSitters",
+          "getFilteredSitters",
+          "getSitterById",
+          "createSitterProfile",
+          "getJobById"
         ]
       }
     ],

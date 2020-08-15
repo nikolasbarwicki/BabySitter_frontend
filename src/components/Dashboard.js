@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile, deleteProfile } from '../actions/profile';
+import { deleteParentProfile } from '../actions/jobs';
 
 const Dashboard = ({
+  deleteParentProfile,
   getCurrentProfile,
   deleteProfile,
   profile,
-  user: { name },
+  user: { name, role },
   userLoading,
   profileLoading,
 }) => {
   useEffect(() => {
-    !userLoading && getCurrentProfile();
+    !userLoading && getCurrentProfile(role);
   }, [userLoading, getCurrentProfile]);
 
   return (
@@ -35,14 +37,17 @@ const Dashboard = ({
                   <h6>
                     You have not yet setup a profile, please add some info
                   </h6>
-                  <Link to="/create-profile" className="btn btn-primary">
+                  <Link
+                    to={`${role}/create-profile`}
+                    className="btn btn-primary"
+                  >
                     Create profile
                   </Link>
                 </>
               ) : (
                 <>
                   <h4>Has profile</h4>
-                  <Link to="/edit-profile" className="btn btn-primary">
+                  <Link to={`${role}/edit-profile`} className="btn btn-primary">
                     Edit profile
                   </Link>
                   <button
@@ -86,14 +91,25 @@ const Dashboard = ({
                           >
                             Close
                           </button>
-                          <button
-                            onClick={deleteProfile}
-                            type="button"
-                            className="btn btn-danger"
-                            data-dismiss="modal"
-                          >
-                            Delete profile
-                          </button>
+                          {role === 'sitter' ? (
+                            <button
+                              onClick={deleteProfile}
+                              type="button"
+                              className="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Delete profile
+                            </button>
+                          ) : (
+                            <button
+                              onClick={deleteParentProfile}
+                              type="button"
+                              className="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Delete profile
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -118,6 +134,7 @@ Dashboard.propTypes = {
   }).isRequired,
   profileLoading: PropTypes.bool.isRequired,
   userLoading: PropTypes.bool.isRequired,
+  deleteParentProfile: PropTypes.func.isRequired,
 };
 
 Dashboard.defaultProps = {
@@ -131,6 +148,8 @@ const mapStateToProps = (state) => ({
   userLoading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteProfile })(
-  Dashboard,
-);
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  deleteProfile,
+  deleteParentProfile,
+})(Dashboard);

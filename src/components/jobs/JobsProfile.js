@@ -1,32 +1,21 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import {
-  faTools,
-  faPencilAlt,
-  faBook,
-  faMusic,
-  faLanguage,
-  faPuzzlePiece,
-  faDog,
-  faUtensils,
-  faBroom,
-} from '@fortawesome/free-solid-svg-icons';
+import { faDog, faUtensils, faBroom } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import { getSitterById } from '../../actions/sitters';
+import { getJobById } from '../../actions/jobs';
 import ContactModal from './ContactModal';
 
-const SittersProfile = ({
-  getSitterById,
+const JobsProfile = ({
+  getJobById,
   match,
   profile: { profile, loading },
   auth: { isAuthenticated },
 }) => {
   useEffect(() => {
-    getSitterById(match.params.id);
-  }, [getSitterById]);
+    getJobById(match.params.id);
+  }, [getJobById]);
 
   return (
     <div className="container">
@@ -42,13 +31,13 @@ const SittersProfile = ({
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link to="/sitters">Babysitter</Link>
+                  <Link to="/jobs">Babysitting jobs</Link>
                 </li>
                 <li className="breadcrumb-item">
                   <Link
                     to={{
-                      pathname: '/sitters',
-                      search: `?location.city=${profile.location.city}`,
+                      pathname: '/jobs',
+                      search: `?city=${profile.location.city}`,
                     }}
                   >
                     {profile.location.city}
@@ -74,10 +63,7 @@ const SittersProfile = ({
                   </div>
                   <div className="col-sm-8 col-md-8 col-lg-9 align-self-center col-12">
                     <div className="">
-                      <h5 className="">
-                        {profile.user.name},{' '}
-                        {moment().diff(profile.dateOfBirth, 'years')}
-                      </h5>
+                      <h5 className="">{profile.user.name}</h5>
                       <h6 className="mb-2 text-muted">
                         Babysitter {profile.location.city}
                       </h6>
@@ -126,97 +112,9 @@ const SittersProfile = ({
             <p>{profile.description}</p>
           </div>
           <hr className="mt-2 mb-3" />
-          <h5>Experience with babysitting</h5>
-          <p>{profile.experience}</p>
-          <hr className="mt-2 mb-3" />
           <div className="row">
-            <div className="col-12 col-sm-6">
-              <h5>Skills</h5>
-              <ul className="list-group list-group-flush">
-                <li
-                  className={`list-group-item ${
-                    profile.skills.crafting
-                      ? null
-                      : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faTools}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Crafting
-                </li>
-                <li
-                  className={`list-group-item ${
-                    profile.skills.drawing
-                      ? null
-                      : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faPencilAlt}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Drawing
-                </li>
-                <li
-                  className={`list-group-item ${
-                    profile.skills.reading
-                      ? null
-                      : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faBook}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Reading
-                </li>
-                <li
-                  className={`list-group-item ${
-                    profile.skills.music ? null : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faMusic}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Music
-                </li>
-                <li
-                  className={`list-group-item ${
-                    profile.skills.language
-                      ? null
-                      : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faLanguage}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Language
-                </li>
-                <li
-                  className={`list-group-item ${
-                    profile.skills.games ? null : 'text-decoration-line-through'
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faPuzzlePiece}
-                    className="mr-3"
-                    style={{ width: '20px' }}
-                  />
-                  Games
-                </li>
-              </ul>
-            </div>
-            <div className="col-12 col-sm-6">
-              <h5>I&apos;m comfortable with</h5>
+            <div className="col-12">
+              <h5>We need a babysitter comfortable with</h5>
               <ul className="list-group list-group-flush">
                 <li
                   className={`list-group-item ${
@@ -269,35 +167,35 @@ const SittersProfile = ({
                 <ul className="w-100 list-group list-group-horizontal flex-md-row flex-column">
                   <li
                     className={`p-3 list-group-item flex-fill text-center ${
-                      profile.experienceAges.baby ? 'active' : null
+                      profile.ageOfChildren.baby ? 'active' : null
                     }`}
                   >
                     Baby
                   </li>
                   <li
                     className={`p-3 list-group-item flex-fill text-center ${
-                      profile.experienceAges.toddler ? 'active' : null
+                      profile.ageOfChildren.toddler ? 'active' : null
                     }`}
                   >
                     Toddler
                   </li>
                   <li
                     className={`p-3 list-group-item flex-fill text-center ${
-                      profile.experienceAges.preschooler ? 'active' : null
+                      profile.ageOfChildren.preschooler ? 'active' : null
                     }`}
                   >
                     Preschooler
                   </li>
                   <li
                     className={`p-3 list-group-item flex-fill text-center ${
-                      profile.experienceAges.gradeschooler ? 'active' : null
+                      profile.ageOfChildren.gradeschooler ? 'active' : null
                     }`}
                   >
                     Gradeschooler
                   </li>
                   <li
                     className={`p-3 list-group-item flex-fill text-center ${
-                      profile.experienceAges.teenager ? 'active' : null
+                      profile.ageOfChildren.teenager ? 'active' : null
                     }`}
                   >
                     Teenager
@@ -312,8 +210,8 @@ const SittersProfile = ({
   );
 };
 
-SittersProfile.propTypes = {
-  getSitterById: PropTypes.func.isRequired,
+JobsProfile.propTypes = {
+  getJobById: PropTypes.func.isRequired,
   profile: PropTypes.shape({
     profile: PropTypes.oneOfType([
       'PropTypes.string.isRequired',
@@ -336,4 +234,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getSitterById })(SittersProfile);
+export default connect(mapStateToProps, { getJobById })(JobsProfile);

@@ -11,3 +11,9 @@ export const GET_PROFILE = 'GET_PROFILE';
 export const GET_PROFILES = 'GET_PROFILES';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
+
+export const GET_JOBS = 'GET_JOBS';
+export const GET_JOB = 'GET_JOB';
+
+export const GET_SITTERS = 'GET_SITTERS';
+export const GET_SITTER = 'GET_SITTER';

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile } from '../actions/profile';
+import { createSitterProfile } from '../../actions/sitters';
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ createSitterProfile, history }) => {
   const [formData, setFormData] = useState({
     address: '',
     dateOfBirth: '',
@@ -61,7 +61,7 @@ const CreateProfile = ({ createProfile, history }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    createProfile(formData, history);
+    createSitterProfile(formData, history);
   };
 
   return (
@@ -399,10 +399,12 @@ const CreateProfile = ({ createProfile, history }) => {
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired,
+  createSitterProfile: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(null, { createSitterProfile })(
+  withRouter(CreateProfile),
+);

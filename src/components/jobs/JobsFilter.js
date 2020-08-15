@@ -3,26 +3,18 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFilteredSitters } from '../../actions/sitters';
+import { getFilteredJobs } from '../../actions/jobs';
 
-const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
+const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
   const [formData, setFormData] = useState({
     city: null,
     radius: null,
-    minAge: null,
-    maxAge: null,
     baby: null,
     toddler: null,
     preschooler: null,
     gradeschooler: null,
     teenager: null,
-    maxHourlyRate: '',
-    crafting: null,
-    drawing: null,
-    reading: null,
-    music: null,
-    language: null,
-    games: null,
+    minHourlyRate: '',
     pets: null,
     cooking: null,
     chores: null,
@@ -32,20 +24,12 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
   const {
     city,
     radius,
-    minAge,
-    maxAge,
     baby,
     toddler,
     preschooler,
     gradeschooler,
     teenager,
-    maxHourlyRate,
-    crafting,
-    drawing,
-    reading,
-    music,
-    language,
-    games,
+    minHourlyRate,
     pets,
     cooking,
     chores,
@@ -64,24 +48,16 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
     const query = {
       city,
       radius,
-      'experienceAges.baby': baby,
-      'experienceAges.toddler': toddler,
-      'experienceAges.preschooler': preschooler,
-      'experienceAges.gradeschooler': gradeschooler,
-      'experienceAges.teenager': teenager,
-      'skills.crafting': crafting,
-      'skills.drawing': drawing,
-      'skills.reading': reading,
-      'skills.music': music,
-      'skills.language': language,
-      'skills.games': games,
+      'ageOfChildren.baby': baby,
+      'ageOfChildren.toddler': toddler,
+      'ageOfChildren.preschooler': preschooler,
+      'ageOfChildren.gradeschooler': gradeschooler,
+      'ageOfChildren.teenager': teenager,
       'comfortableWith.pets': pets,
       'comfortableWith.cooking': cooking,
       'comfortableWith.chores': chores,
-      'age[gte]': minAge,
-      'age[lte]': maxAge,
       sort,
-      'hourlyRate[lte]': maxHourlyRate,
+      'hourlyRate[lte]': minHourlyRate,
     };
 
     for (const key of Object.keys(query)) {
@@ -91,11 +67,11 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
     }
 
     push({
-      pathname: '/sitters',
+      pathname: '/jobs',
       search: queryString.stringify(query),
     });
 
-    getFilteredSitters(query);
+    getFilteredJobs(query);
   };
 
   return (
@@ -136,35 +112,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             </select>
           </div>
         </div>
-        <div className="row g-3">
-          <div className="col-sm-6">
-            <label htmlFor="inputEmail4" className="form-label">
-              Minimum age
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Minimum age"
-              id="minAge"
-              value={minAge}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
 
-          <div className="col-sm-6">
-            <label htmlFor="inputEmail4" className="form-label">
-              Maximum age
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Maximum age"
-              id="maxAge"
-              value={maxAge}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
-        </div>
         <div>
           Experience with age(s)
           <div className="form-check">
@@ -234,8 +182,8 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           </div>
         </div>
 
-        <label htmlFor="maxHourlyRate" className="form-label">
-          Maxium pay per hour
+        <label htmlFor="minHourlyRate" className="form-label">
+          Minimum pay per hour
         </label>
         <div className="input-group mb-3">
           <span className="input-group-text">$</span>
@@ -243,94 +191,14 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           <input
             type="text"
             className="form-control"
-            id="maxHourlyRate"
-            value={maxHourlyRate}
+            id="minHourlyRate"
+            value={minHourlyRate}
             onChange={(e) => onChange(e)}
           />
         </div>
+
         <div>
-          Skills
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="crafting"
-              checked={crafting}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="crafting">
-              crafting
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="drawing"
-              checked={drawing}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="drawing">
-              drawing
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="reading"
-              checked={reading}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="reading">
-              reading
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="music"
-              checked={music}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="music">
-              music
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="language"
-              checked={language}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="language">
-              language
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              autoComplete="off"
-              id="games"
-              checked={games}
-              onChange={(e) => onCheck(e)}
-            />
-            <label className="form-check-label" htmlFor="games">
-              games
-            </label>
-          </div>
-        </div>
-        <div>
-          Comfortable with
+          Needs a babysitter comfortable with
           <div className="form-check">
             <input
               className="form-check-input"
@@ -385,6 +253,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               Sort by
             </option>
             <option value="hourlyRate">Hourly rate</option>
+            <option value="numberOfChildren">Number of children</option>
           </select>
           <button type="submit" className="btn btn-primary btn-lg mt-4 mb-4">
             Search
@@ -395,11 +264,11 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
   );
 };
 
-SittersFilter.propTypes = {
-  getFilteredSitters: PropTypes.func.isRequired,
+JobsFilter.propTypes = {
+  getFilteredJobs: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { getFilteredSitters })(withRouter(SittersFilter));
+export default connect(null, { getFilteredJobs })(withRouter(JobsFilter));

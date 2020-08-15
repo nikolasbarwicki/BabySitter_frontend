@@ -2,23 +2,24 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
+import { faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
 import SittersFilter from './SittersFilter';
 import SittersItem from './SittersItem';
-import { getProfiles, getFilteredProfiles } from '../../actions/profile';
+import { getSitters, getFilteredSitters } from '../../actions/sitters';
 
 const SittersList = ({
-  getProfiles,
-  getFilteredProfiles,
-  profile: { profiles, loading },
+  getSitters,
+  getFilteredSitters,
+  sitters: { sitters, loading },
   location: { search },
 }) => {
   useEffect(() => {
     if (search) {
-      getFilteredProfiles(queryString.parse(search));
+      getFilteredSitters(queryString.parse(search));
     } else {
-      getProfiles();
+      getSitters();
     }
-  }, [getProfiles]);
+  }, [getSitters]);
 
   return (
     <div className="container ">
@@ -28,7 +29,7 @@ const SittersList = ({
           <h4>Find babysitter </h4>
           <p>
             Are you looking for a suitable babysitter? Babysits has a large
-            overview of babysitters, with {profiles.count || 'many'} babysitters
+            overview of babysitters, with {sitters.count || 'many'} babysitters
             currently available matching your search criteria. Start contacting
             babysitters now to find a great babysitter to care for your
             child(ren) in no time!
@@ -41,9 +42,9 @@ const SittersList = ({
             </div>
           ) : (
             <>
-              {profiles.count > 0 ? (
+              {sitters.count > 0 ? (
                 // eslint-disable-next-line react/prop-types
-                profiles.data.map((sitter) => (
+                sitters.data.map((sitter) => (
                   <SittersItem
                     key={sitter._id}
                     id={sitter.user._id}
@@ -69,24 +70,21 @@ const SittersList = ({
 };
 
 SittersList.propTypes = {
-  profile: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    profiles: PropTypes.shape({
-      data: PropTypes.arrayOf().isRequired,
-      count: PropTypes.number.isRequired,
-    }).isRequired,
+  getSitters: PropTypes.func.isRequired,
+  getFilteredSitters: PropTypes.func.isRequired,
+  sitters: PropTypes.shape({
+    sitters: PropTypes.objectOf(PropTypes.shape({}).isRequired).isRequired,
+    loading: faPrescriptionBottle,
   }).isRequired,
-  getProfiles: PropTypes.func.isRequired,
-  getFilteredProfiles: PropTypes.func.isRequired,
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  sitters: state.sitters,
 });
 
-export default connect(mapStateToProps, { getProfiles, getFilteredProfiles })(
+export default connect(mapStateToProps, { getSitters, getFilteredSitters })(
   SittersList,
 );

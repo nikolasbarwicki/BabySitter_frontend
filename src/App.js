@@ -12,11 +12,15 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/Alert';
 import Dashboard from './components/Dashboard';
-import EditProfile from './components/EditProfile';
-import CreateProfile from './components/CreateProfile';
+import EditSitterProfile from './components/sitters/EditSitterProfile';
+import EditParentProfile from './components/jobs/EditParentProfile';
+import CreateSitterProfile from './components/sitters/CreateSitterProfile';
+import CreateParentProfile from './components/jobs/CreateParentProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 import SittersList from './components/sitters/SittersList';
 import SittersProfile from './components/sitters/SittersProfile';
+import JobsList from './components/jobs/JobsList';
+import JobsProfile from './components/jobs/JobsProfile';
 import NotFound from './components/NotFound';
 
 if (localStorage.token) {
@@ -39,12 +43,28 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/sitters" component={SittersList} />
           <Route exact path="/sitters/:id" component={SittersProfile} />
+          <Route exact path="/jobs" component={JobsList} />
+          <Route exact path="/jobs/:id" component={JobsProfile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute
             exact
-            path="/create-profile"
-            component={CreateProfile}
+            path="/sitter/edit-profile"
+            component={EditSitterProfile}
+          />
+          <PrivateRoute
+            exact
+            path="/parent/edit-profile"
+            component={EditParentProfile}
+          />
+          <PrivateRoute
+            exact
+            path="/sitter/create-profile"
+            component={CreateSitterProfile}
+          />
+          <PrivateRoute
+            exact
+            path="/parent/create-profile"
+            component={CreateParentProfile}
           />
           <Route path="/" component={NotFound} />
         </Switch>

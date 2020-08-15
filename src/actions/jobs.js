@@ -2,59 +2,21 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_PROFILE,
-  GET_PROFILES,
+  GET_JOBS,
+  GET_JOB,
   PROFILE_ERROR,
   CLEAR_PROFILE,
 } from './types';
 
-// Get current users profile
-export const getCurrentProfile = (role) => async (dispatch) => {
-  if (role === 'sitter') {
-    try {
-      const res = await axios.get(`/api/sitters/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    }
-  }
-
-  if (role === 'parent') {
-    try {
-      const res = await axios.get(`/api/jobs/me`);
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    }
-  }
-};
-
-// Get all profiles
-export const getProfiles = () => async (dispatch) => {
+// Get all jobs
+export const getJobs = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
 
   try {
-    const res = await axios.get(`/api/sitters`);
+    const res = await axios.get('/api/jobs');
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_JOBS,
       payload: res.data,
     });
   } catch (error) {
@@ -69,16 +31,16 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 // Get all profiles with query params
-export const getFilteredProfiles = (query) => async (dispatch) => {
+export const getFilteredJobs = (query) => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
 
   try {
-    const res = await axios.get(`/api/sitters`, {
+    const res = await axios.get('/api/jobs', {
       params: query,
     });
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_JOBS,
       payload: res.data,
     });
   } catch (error) {
@@ -92,13 +54,13 @@ export const getFilteredProfiles = (query) => async (dispatch) => {
   }
 };
 
-// Get profile by ID
-export const getProfileById = (userId) => async (dispatch) => {
+// Get job by ID
+export const getJobById = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/sitters/user/${userId}`);
+    const res = await axios.get(`/api/jobs/user/${userId}`);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_JOB,
       payload: res.data,
     });
   } catch (error) {
@@ -113,7 +75,7 @@ export const getProfileById = (userId) => async (dispatch) => {
 };
 
 // Create profile
-export const createProfile = (formData, history) => async (dispatch) => {
+export const createParentProfile = (formData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -121,7 +83,7 @@ export const createProfile = (formData, history) => async (dispatch) => {
       },
     };
 
-    const res = await axios.post('/api/sitters', formData, config);
+    const res = await axios.post('/api/jobs', formData, config);
 
     dispatch({
       type: GET_PROFILE,
@@ -147,8 +109,10 @@ export const createProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-// Edit profile
-export const editProfile = (formData, history, id) => async (dispatch) => {
+// Edit parent profile
+export const editParentProfile = (formData, history, id) => async (
+  dispatch,
+) => {
   try {
     const config = {
       headers: {
@@ -156,7 +120,7 @@ export const editProfile = (formData, history, id) => async (dispatch) => {
       },
     };
 
-    const res = await axios.put(`/api/sitters/${id}`, formData, config);
+    const res = await axios.put(`/api/jobs/${id}`, formData, config);
 
     dispatch({
       type: GET_PROFILE,
@@ -183,9 +147,9 @@ export const editProfile = (formData, history, id) => async (dispatch) => {
 };
 
 // Delete profile
-export const deleteProfile = () => async (dispatch) => {
+export const deleteParentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.delete('/api/sitters/user');
+    const res = await axios.delete('/api/jobs/user');
 
     dispatch({ type: CLEAR_PROFILE });
 

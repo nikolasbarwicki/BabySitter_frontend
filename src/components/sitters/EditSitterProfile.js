@@ -3,11 +3,12 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { editProfile, getCurrentProfile } from '../actions/profile';
+import { getCurrentProfile } from '../../actions/profile';
+import { editSitterProfile } from '../../actions/sitters';
 
-const EditProfile = ({
+const EditSitterProfile = ({
   profile: { profile, loading },
-  editProfile,
+  editSitterProfile,
   getCurrentProfile,
   history,
 }) => {
@@ -132,7 +133,7 @@ const EditProfile = ({
   const onSubmit = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-underscore-dangle
-    editProfile(formData, history, profile._id);
+    editSitterProfile(formData, history, profile._id);
   };
 
   return (
@@ -469,36 +470,57 @@ const EditProfile = ({
   );
 };
 
-EditProfile.propTypes = {
-  editProfile: PropTypes.func.isRequired,
+EditSitterProfile.propTypes = {
+  profile: PropTypes.shape({
+    profile: PropTypes.shape({
+      location: PropTypes.shape({
+        city: PropTypes.string.isRequired,
+        street: PropTypes.string.isRequired,
+      }).isRequired,
+      dateOfBirth: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      experience: PropTypes.string.isRequired,
+      experienceAges: PropTypes.shape({
+        baby: PropTypes.bool.isRequired,
+        toddler: PropTypes.bool.isRequired,
+        preschooler: PropTypes.bool.isRequired,
+        gradeschooler: PropTypes.bool.isRequired,
+        teenager: PropTypes.bool.isRequired,
+      }).isRequired,
+      hourlyRate: PropTypes.number.isRequired,
+      skills: PropTypes.shape({
+        crafting: PropTypes.bool.isRequired,
+        drawing: PropTypes.bool.isRequired,
+        reading: PropTypes.bool.isRequired,
+        music: PropTypes.bool.isRequired,
+        language: PropTypes.bool.isRequired,
+        games: PropTypes.bool.isRequired,
+      }).isRequired,
+      comfortableWith: PropTypes.shape({
+        pets: PropTypes.bool.isRequired,
+        cooking: PropTypes.bool.isRequired,
+        chores: PropTypes.bool.isRequired,
+      }).isRequired,
+      contactPhone: PropTypes.string.isRequired,
+      contactEmail: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
+  editSitterProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  profile: PropTypes.shape({
-    profile: PropTypes.oneOfType([
-      PropTypes.objectOf(
-        PropTypes.oneOfType([
-          PropTypes.bool,
-          PropTypes.number,
-          PropTypes.string,
-        ]),
-      ),
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    loading: PropTypes.bool.isRequired,
-  }),
 };
 
-EditProfile.defaultProps = {
-  profile: { profile: {} },
-};
+EditSitterProfile.defaultProps = {};
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { editProfile, getCurrentProfile })(
-  withRouter(EditProfile),
-);
+export default connect(mapStateToProps, {
+  editSitterProfile,
+  getCurrentProfile,
+})(withRouter(EditSitterProfile));
