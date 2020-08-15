@@ -29,7 +29,7 @@ const Login = ({ isAuthenticated, login }) => {
       <div className="row vh-100 d-flex justify-content-center align-items-center">
         <div className="card col-12 col-md-8 col-lg-6 col-xl-4">
           <div className="card-body">
-            <h4 className="text-center mb-3">Log in</h4>
+            <h4 className="text-center mb-3">Sign in</h4>
             <form className="form" onSubmit={(e) => onSubmit(e)}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -64,7 +64,7 @@ const Login = ({ isAuthenticated, login }) => {
                   type="submit"
                   className="btn btn-primary btn-block mb-3"
                 >
-                  Log in
+                  Sign in
                 </button>
               </div>
               <hr className="mt-2 mb-3" />

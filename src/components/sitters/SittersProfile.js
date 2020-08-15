@@ -14,7 +14,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { getSitterById } from '../../actions/sitters';
 import ContactModal from './ContactModal';
 
@@ -22,14 +21,17 @@ const SittersProfile = ({
   getSitterById,
   match,
   profile: { profile, loading },
-  auth: { isAuthenticated },
+  auth: {
+    isAuthenticated,
+    user: { role },
+  },
 }) => {
   useEffect(() => {
     getSitterById(match.params.id);
   }, [getSitterById]);
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       {profile === null || loading ? (
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
@@ -62,7 +64,7 @@ const SittersProfile = ({
           </div>
           <div className="row">
             <div className="col-12 col-md-8">
-              <div className="card mb-4 " style={{ height: '10rem' }}>
+              <div className="card mb-4 shadow-sm" style={{ height: '10rem' }}>
                 <div className="row">
                   <div className="col-md-4 col-lg-3 align-self-center col-4 d-none d-sm-block">
                     <img
@@ -75,8 +77,7 @@ const SittersProfile = ({
                   <div className="col-sm-8 col-md-8 col-lg-9 align-self-center col-12">
                     <div className="">
                       <h5 className="">
-                        {profile.user.name},{' '}
-                        {moment().diff(profile.dateOfBirth, 'years')}
+                        {profile.user.name}, {profile.age}
                       </h5>
                       <h6 className="mb-2 text-muted">
                         Babysitter {profile.location.city}
@@ -88,13 +89,17 @@ const SittersProfile = ({
             </div>
             <div className="col-12 col-md-4">
               <div
-                className="card d-flex-column align-items-center justify-content-center"
+                className="card d-flex-column align-items-center justify-content-center shadow-sm"
                 style={{ height: '10rem' }}
               >
                 <div>
                   <h5 className="text-center">${profile.hourlyRate}.00/hr</h5>
                   <h6 className="mb-2 text-muted text-center">Hourly rate</h6>
-                  {isAuthenticated ? (
+                  {isAuthenticated && role === 'sitter' ? (
+                    <p className="w-75 text-center mx-auto text-danger">
+                      To contact this user, you need to change your user type.
+                    </p>
+                  ) : (
                     <>
                       <button
                         type="button"
@@ -111,11 +116,12 @@ const SittersProfile = ({
                         phone={profile.contactPhone}
                       />
                     </>
-                  ) : (
+                  )}
+                  {!isAuthenticated ? (
                     <Link to="/login" className="btn btn-primary">
                       Login to see contact info
                     </Link>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -265,38 +271,38 @@ const SittersProfile = ({
             <hr className="mt-2 mb-3" />
             <div className="row">
               <div className="col-12 mb-4">
-                <h3>Experience with age(s)</h3>
-                <ul className="w-100 list-group list-group-horizontal flex-md-row flex-column">
+                <h5>Experience with age(s)</h5>
+                <ul className="w-100 list-group list-group-horizontal flex-md-row flex-column mt-3">
                   <li
-                    className={`p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
                       profile.experienceAges.baby ? 'active' : null
                     }`}
                   >
                     Baby
                   </li>
                   <li
-                    className={`p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
                       profile.experienceAges.toddler ? 'active' : null
                     }`}
                   >
                     Toddler
                   </li>
                   <li
-                    className={`p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
                       profile.experienceAges.preschooler ? 'active' : null
                     }`}
                   >
                     Preschooler
                   </li>
                   <li
-                    className={`p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
                       profile.experienceAges.gradeschooler ? 'active' : null
                     }`}
                   >
                     Gradeschooler
                   </li>
                   <li
-                    className={`p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
                       profile.experienceAges.teenager ? 'active' : null
                     }`}
                   >
@@ -323,6 +329,9 @@ SittersProfile.propTypes = {
   }).isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      role: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({

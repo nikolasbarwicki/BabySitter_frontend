@@ -99,11 +99,11 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
   };
 
   return (
-    <div className="col-4">
+    <div className="col-12 col-sm-4">
       <h4>Filters</h4>
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row g-3">
-          <div className="col-sm-6">
+          <div className="col-12 col-lg-6">
             <label htmlFor="city" className="form-label">
               City
             </label>
@@ -117,7 +117,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             />
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-12 col-lg-6">
             <label htmlFor="radius" className="form-label">
               Distance
             </label>
@@ -136,8 +136,8 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             </select>
           </div>
         </div>
-        <div className="row g-3">
-          <div className="col-sm-6">
+        <div className="row g-3 mt-1">
+          <div className="col-12 col-lg-6">
             <label htmlFor="inputEmail4" className="form-label">
               Minimum age
             </label>
@@ -151,7 +151,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             />
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-12 col-lg-6">
             <label htmlFor="inputEmail4" className="form-label">
               Maximum age
             </label>
@@ -165,9 +165,9 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             />
           </div>
         </div>
-        <div>
+        <div className="mt-3">
           Experience with age(s)
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -234,7 +234,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           </div>
         </div>
 
-        <label htmlFor="maxHourlyRate" className="form-label">
+        <label htmlFor="maxHourlyRate" className="form-label mt-3 ">
           Maxium pay per hour
         </label>
         <div className="input-group mb-3">
@@ -248,9 +248,9 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             onChange={(e) => onChange(e)}
           />
         </div>
-        <div>
+        <div className="mb-3">
           Skills
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -329,9 +329,9 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
             </label>
           </div>
         </div>
-        <div>
+        <div className="mb-3">
           Comfortable with
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"

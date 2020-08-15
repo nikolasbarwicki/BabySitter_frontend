@@ -9,7 +9,7 @@ const Navigation = ({ isAuthenticated, loading, logout, name }) => {
     <div className="btn-group">
       <button
         type="button"
-        className="btn btn-secondary dropdown-toggle"
+        className="btn btn-outline-light dropdown-toggle"
         data-toggle="dropdown"
       >
         Hi, {name}{' '}
@@ -33,22 +33,22 @@ const Navigation = ({ isAuthenticated, loading, logout, name }) => {
   );
 
   const guestLinks = (
-    <ul className="navbar-nav mb-2 mb-lg-0">
+    <ul className="navbar-nav mb-2 mb-lg-0 ">
       <li className="nav-item mr-2">
-        <Link to="/register" className="btn btn-primary">
-          Sign up
+        <Link to="/login" className="nav-link">
+          Sign In
         </Link>
       </li>
       <li className="nav-item">
-        <Link to="/login" className="btn btn-secondary">
-          Log in
+        <Link to="/register" className="btn btn-primary">
+          Sign up
         </Link>
       </li>
     </ul>
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           YourBabySitter

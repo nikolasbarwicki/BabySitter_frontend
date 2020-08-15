@@ -23,10 +23,10 @@ const SittersList = ({
   }, [getSitters]);
 
   return (
-    <div className="container ">
+    <div className="container mt-4">
       <div className="row">
         <SittersFilter />
-        <div className="col-8">
+        <div className="col-12 col-sm-8">
           <h4>Find babysitter </h4>
           <p>
             Are you looking for a suitable babysitter? Babysits has a large

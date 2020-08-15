@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const SittersItem = ({ name, age, city, desc, id }) => {
   return (
-    <div className="card mb-4">
+    <div className="card mb-4 shadow-sm bg-light">
       <div className="row g-0">
-        <div className="col-md-3 d-flex justify-content-center align-items-center">
+        <div className="col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
           <img
             className="rounded-circle m-2"
             width="120px"
@@ -16,7 +16,7 @@ const SittersItem = ({ name, age, city, desc, id }) => {
             alt="..."
           />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-8 col-lg-9">
           <div className="card-body">
             <h5 className="card-title">
               {name}, {age}

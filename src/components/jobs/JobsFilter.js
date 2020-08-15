@@ -75,11 +75,11 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
   };
 
   return (
-    <div className="col-4">
+    <div className="col-12 col-sm-4">
       <h4>Filters</h4>
       <form onSubmit={(e) => onSubmit(e)}>
-        <div className="row g-3">
-          <div className="col-sm-6">
+        <div className="row g-3 mb-3">
+          <div className="col-12 col-lg-6">
             <label htmlFor="city" className="form-label">
               City
             </label>
@@ -93,7 +93,7 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
             />
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-12 col-lg-6">
             <label htmlFor="radius" className="form-label">
               Distance
             </label>
@@ -113,9 +113,9 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
           </div>
         </div>
 
-        <div>
+        <div className="mb-3">
           Experience with age(s)
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -187,7 +187,6 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
         </label>
         <div className="input-group mb-3">
           <span className="input-group-text">$</span>
-
           <input
             type="text"
             className="form-control"
@@ -197,9 +196,9 @@ const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
           />
         </div>
 
-        <div>
+        <div className="mb-3">
           Needs a babysitter comfortable with
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"

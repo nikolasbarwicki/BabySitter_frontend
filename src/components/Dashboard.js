@@ -19,7 +19,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     !userLoading && getCurrentProfile(role);
-  }, [userLoading, getCurrentProfile]);
+  }, [userLoading]);
 
   function renderDashboard() {
     if (profileLoading && profile == null) {
@@ -31,7 +31,7 @@ const Dashboard = ({
         <>
           <div className="row">
             <div className="col-12 col-lg-6">
-              <div className="card bg-warning mt-3 mb-3">
+              <div className="card bg-warning mt-3 mb-3 shadow">
                 <div className="card-header font-weight-bolder">
                   Profile Status
                 </div>
@@ -45,7 +45,7 @@ const Dashboard = ({
               </div>
             </div>
             <div className="col-12 col-lg-6">
-              <div className="card bg-light mt-3 mb-3">
+              <div className="card bg-light mt-3 mb-3 shadow">
                 <div className="card-header font-weight-bolder">
                   Create profile
                 </div>
@@ -72,7 +72,7 @@ const Dashboard = ({
         <>
           <div className="row">
             <div className="col-12 col-lg-4">
-              <div className="card text-white bg-success mt-3 mb-3">
+              <div className="card text-white bg-success mt-3 mb-3 shadow">
                 <div className="card-header font-weight-bolder">
                   Profile Status
                 </div>
@@ -87,7 +87,7 @@ const Dashboard = ({
             </div>
 
             <div className="col-12 col-lg-4">
-              <div className="card bg-light mt-3 mb-3">
+              <div className="card bg-light mt-3 mb-3 shadow">
                 <div className="card-header font-weight-bolder">
                   Edit profile
                 </div>
@@ -103,7 +103,7 @@ const Dashboard = ({
             </div>
 
             <div className="col-12 col-lg-4">
-              <div className="card bg-light mt-3 mb-3">
+              <div className="card bg-light mt-3 mb-3 shadow">
                 <div className="card-header font-weight-bolder">
                   Delete profile
                 </div>
@@ -131,7 +131,7 @@ const Dashboard = ({
   }
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <div className="row">
         <div className="col">
           {profileLoading ? (
