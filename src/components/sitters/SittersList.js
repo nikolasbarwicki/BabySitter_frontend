@@ -6,6 +6,7 @@ import { faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
 import SittersFilter from './SittersFilter';
 import SittersItem from './SittersItem';
 import { getSitters, getFilteredSitters } from '../../actions/sitters';
+import Spinner from '../Spinner';
 
 const SittersList = ({
   getSitters,
@@ -35,11 +36,7 @@ const SittersList = ({
             child(ren) in no time!
           </p>
           {loading ? (
-            <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
+            <Spinner />
           ) : (
             <>
               {sitters.count > 0 ? (

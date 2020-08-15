@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCurrentProfile, deleteProfile } from '../actions/profile';
+import { getCurrentProfile } from '../actions/profile';
+import { deleteSitterProfile } from '../actions/sitters';
 import { deleteParentProfile } from '../actions/jobs';
+import Modal from './Modal';
+import Spinner from './Spinner';
 
 const Dashboard = ({
-  deleteParentProfile,
   getCurrentProfile,
-  deleteProfile,
+  deleteParentProfile,
+  deleteSitterProfile,
   profile,
   user: { name, role },
   userLoading,
@@ -18,104 +21,131 @@ const Dashboard = ({
     !userLoading && getCurrentProfile(role);
   }, [userLoading, getCurrentProfile]);
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          {profileLoading ? (
-            <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
+  function renderDashboard() {
+    if (profileLoading && profile == null) {
+      return <Spinner />;
+    }
+
+    if (!profileLoading && profile == null) {
+      return (
+        <>
+          <div className="row">
+            <div className="col-12 col-lg-6">
+              <div className="card bg-warning mt-3 mb-3">
+                <div className="card-header font-weight-bolder">
+                  Profile Status
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">Post your profile</h5>
+                  <p className="card-text">
+                    Your profile does not appear in the search results yet.
+                    Complete all required fields first.
+                  </p>
+                </div>
               </div>
             </div>
-          ) : (
-            <>
-              <h2>Dashboard</h2>
-              <h5>Welcome {name}</h5>
-              {profile == null ? (
-                <>
-                  <h6>
-                    You have not yet setup a profile, please add some info
-                  </h6>
+            <div className="col-12 col-lg-6">
+              <div className="card bg-light mt-3 mb-3">
+                <div className="card-header font-weight-bolder">
+                  Create profile
+                </div>
+                <div className="card-body">
+                  <p className="card-text">
+                    Click the button below to create your profile
+                  </p>
                   <Link
                     to={`${role}/create-profile`}
                     className="btn btn-primary"
                   >
                     Create profile
                   </Link>
-                </>
-              ) : (
-                <>
-                  <h4>Has profile</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    if (!profileLoading && profile) {
+      return (
+        <>
+          <div className="row">
+            <div className="col-12 col-lg-4">
+              <div className="card text-white bg-success mt-3 mb-3">
+                <div className="card-header font-weight-bolder">
+                  Profile Status
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">Your profile is public</h5>
+                  <p className="card-text">
+                    Other users can view your profile. They will contact you via
+                    email or phone.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-lg-4">
+              <div className="card bg-light mt-3 mb-3">
+                <div className="card-header font-weight-bolder">
+                  Edit profile
+                </div>
+                <div className="card-body">
+                  <p className="card-text">
+                    Click the button below to update your profile
+                  </p>
                   <Link to={`${role}/edit-profile`} className="btn btn-primary">
                     Edit profile
                   </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-lg-4">
+              <div className="card bg-light mt-3 mb-3">
+                <div className="card-header font-weight-bolder">
+                  Delete profile
+                </div>
+                <div className="card-body">
+                  <p className="card-text">
+                    Click the button below to delete your profile
+                  </p>
                   <button
                     type="button"
-                    className="btn btn-danger ml-2"
+                    className="btn btn-danger"
                     data-toggle="modal"
                     data-target="#exampleModal"
                   >
                     Delete profile
                   </button>
-                  <div
-                    className="modal fade"
-                    id="exampleModal"
-                    tabIndex="-1"
-                    aria-labelledby="deleteProfileModal"
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 className="modal-title" id="deleteProfileModal">
-                            Delete profile
-                          </h5>
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div className="modal-body">
-                          Are you sure? This can NOT be undone!
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          {role === 'sitter' ? (
-                            <button
-                              onClick={deleteProfile}
-                              type="button"
-                              className="btn btn-danger"
-                              data-dismiss="modal"
-                            >
-                              Delete profile
-                            </button>
-                          ) : (
-                            <button
-                              onClick={deleteParentProfile}
-                              type="button"
-                              className="btn btn-danger"
-                              data-dismiss="modal"
-                            >
-                              Delete profile
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    return null;
+  }
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          {profileLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <h2>Dashboard</h2>
+              <h4 className="mt-3">Welcome, {name}!</h4>
+              {renderDashboard()}
+              <Modal
+                role={role}
+                deleteParentProfile={deleteParentProfile}
+                deleteSitterProfile={deleteSitterProfile}
+              />
             </>
           )}
         </div>
@@ -126,7 +156,7 @@ const Dashboard = ({
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  deleteProfile: PropTypes.func.isRequired,
+  deleteSitterProfile: PropTypes.func.isRequired,
   profile: PropTypes.shape({}),
   user: PropTypes.shape({
     role: PropTypes.string,
@@ -150,6 +180,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getCurrentProfile,
-  deleteProfile,
+  deleteSitterProfile,
   deleteParentProfile,
 })(Dashboard);

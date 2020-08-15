@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import JobsFilter from './JobsFilter';
 import JobsItem from './JobsItem';
 import { getJobs } from '../../actions/jobs';
+import Spinner from '../Spinner';
 
 const JobsList = ({ getJobs, jobs: { jobs, loading } }) => {
   useEffect(() => {
@@ -23,11 +24,7 @@ const JobsList = ({ getJobs, jobs: { jobs, loading } }) => {
             job on the babysitting community in no time!
           </p>
           {loading ? (
-            <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
+            <Spinner />
           ) : (
             <>
               {jobs.count > 0 ? (

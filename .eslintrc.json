@@ -51,7 +51,8 @@
           "getFilteredSitters",
           "getSitterById",
           "createSitterProfile",
-          "getJobById"
+          "getJobById",
+          "deleteSitterProfile"
         ]
       }
     ],
