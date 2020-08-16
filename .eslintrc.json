@@ -60,6 +60,7 @@
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "react/jsx-one-expression-per-line": "off",
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

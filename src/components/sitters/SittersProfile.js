@@ -28,7 +28,7 @@ const SittersProfile = ({
 }) => {
   useEffect(() => {
     getSitterById(match.params.id);
-  }, [getSitterById]);
+  }, [getSitterById, match.params.id]);
 
   return (
     <div className="container mt-4">

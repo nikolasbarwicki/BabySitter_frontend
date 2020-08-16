@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import {
+  faPiggyBank,
+  faChild,
+  faGlobeEurope,
+  faShieldAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,8 +19,11 @@ const Landing = ({ isAuthenticated, history: { push } }) => {
 
   return (
     <div className="container ">
-      <div className="row justify-content-md-center align-items-center vh-100">
-        <div className="col col-lg-3 d-flex flex-column justify-content-center">
+      <div
+        className="row d-flex flex-column flex-md-row justify-content-center align-items-center"
+        style={{ height: '60vh' }}
+      >
+        <div className="col-12 col-sm-8 col-md-4 col-lg-4 mb-3">
           <h5 className="mb-3 text-center">Quickly find a babysitter</h5>
           <form
             className="input-group"
@@ -54,11 +64,40 @@ const Landing = ({ isAuthenticated, history: { push } }) => {
             </button>
           </form>
         </div>
-        <div className="col col-lg-3 d-flex flex-column justify-content-center">
-          <h5 className="mb-3 text-center">Looking far a babysitting job?</h5>
-          <Link to="/register" className="btn btn-primary">
+        <div className="col-12 col-sm-8 col-md-4 col-lg-4 mb-3">
+          <h5 className="mb-3 text-center">Looking for a babysitting job?</h5>
+          <Link to="/register" className="btn btn-primary d-block">
             Sign up for free
           </Link>
+        </div>
+      </div>
+      <div className="row d-flex flex-row text-center justify-content-center">
+        <h3 className="mb-5">
+          Together we make babysitting transparent and trustworthy
+        </h3>
+        <div className="col-6 col-lg-2">
+          <div>
+            <FontAwesomeIcon icon={faChild} size="4x" color="#0d6efd" />
+            <h5 className="mt-3">Free for babysitters</h5>
+          </div>
+        </div>
+        <div className="col-6 col-lg-2">
+          <div>
+            <FontAwesomeIcon icon={faPiggyBank} size="4x" color="#0d6efd" />
+            <h5 className="mt-3">Affordable for parents</h5>
+          </div>
+        </div>
+        <div className="col-6 col-lg-2">
+          <div>
+            <FontAwesomeIcon icon={faGlobeEurope} size="4x" color="#0d6efd" />
+            <h5 className="mt-3">Babysitters across England</h5>
+          </div>
+        </div>
+        <div className="col-6 col-lg-2">
+          <div>
+            <FontAwesomeIcon icon={faShieldAlt} size="4x" color="#0d6efd" />
+            <h5 className="mt-3">Trustworthy user verifications</h5>
+          </div>
         </div>
       </div>
     </div>

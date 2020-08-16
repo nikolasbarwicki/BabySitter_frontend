@@ -35,9 +35,11 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
   }
 
   return (
-    <div className="container">
-      <div className="row d-flex justify-content-center mt-5" />
-      <div className="row d-flex justify-content-center ">
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      style={{ height: '90vh' }}
+    >
+      <div className="row d-flex justify-content-center align-items-center">
         <div className="card col-12 col-md-8 col-lg-6 col-xl-4">
           <div className="card-body">
             <h4 className="text-center mb-3">Sign up</h4>

@@ -20,7 +20,7 @@ const SittersList = ({
     } else {
       getSitters();
     }
-  }, [getSitters]);
+  }, [getSitters, getFilteredSitters, search]);
 
   return (
     <div className="container mt-4">

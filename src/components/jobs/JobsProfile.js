@@ -18,7 +18,7 @@ const JobsProfile = ({
 }) => {
   useEffect(() => {
     getJobById(match.params.id);
-  }, [getJobById]);
+  }, [getJobById, match.params.id]);
 
   return (
     <div className="container mt-4">

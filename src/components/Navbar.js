@@ -6,7 +6,7 @@ import { logout } from '../actions/auth';
 
 const Navigation = ({ isAuthenticated, loading, logout, name }) => {
   const authLinks = (
-    <div className="btn-group">
+    <div className="btn-group d-flex">
       <button
         type="button"
         className="btn btn-outline-light dropdown-toggle"

@@ -19,7 +19,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     !userLoading && getCurrentProfile(role);
-  }, [userLoading]);
+  }, [userLoading, getCurrentProfile, role]);
 
   function renderDashboard() {
     if (profileLoading && profile == null) {
