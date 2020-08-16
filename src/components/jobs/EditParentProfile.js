@@ -30,7 +30,6 @@ const EditParentProfile = ({
 
   useEffect(() => {
     getCurrentProfile('parent');
-    console.log('got profile');
 
     setFormData({
       address:
@@ -78,6 +77,7 @@ const EditParentProfile = ({
       contactEmail:
         loading || !profile.contactEmail ? '' : profile.contactEmail,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const {
@@ -376,14 +376,18 @@ EditParentProfile.propTypes = {
       contactPhone: PropTypes.string.isRequired,
       contactEmail: PropTypes.string.isRequired,
       _id: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     loading: PropTypes.bool.isRequired,
-  }).isRequired,
+  }),
   editParentProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+EditParentProfile.defaultProps = {
+  profile: {},
 };
 
 const mapStateToProps = (state) => ({

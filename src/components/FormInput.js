@@ -22,10 +22,14 @@ const FormInput = ({ id, type = text, placeholder, value, onChange }) => {
 
 FormInput.propTypes = {
   id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+};
+
+FormInput.defaultProps = {
+  type: 'text',
 };
 
 export default FormInput;

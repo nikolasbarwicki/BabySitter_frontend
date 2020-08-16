@@ -7,18 +7,18 @@ import { getFilteredJobs } from '../../actions/jobs';
 
 const JobsFilter = ({ getFilteredJobs, history: { push } }) => {
   const [formData, setFormData] = useState({
-    city: null,
-    radius: null,
-    baby: null,
-    toddler: null,
-    preschooler: null,
-    gradeschooler: null,
-    teenager: null,
+    city: '',
+    radius: '',
+    baby: false,
+    toddler: false,
+    preschooler: false,
+    gradeschooler: false,
+    teenager: false,
     minHourlyRate: '',
-    pets: null,
-    cooking: null,
-    chores: null,
-    sort: null,
+    pets: false,
+    cooking: false,
+    chores: false,
+    sort: '',
   });
 
   const {

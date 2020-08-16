@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/auth';
 
-const Navigation = ({ isAuthenticated, loading, logout, name }) => {
+const Navbar = ({ isAuthenticated, loading, logout, name }) => {
   const authLinks = (
     <div className="btn-group d-flex">
       <button
@@ -85,11 +85,15 @@ const Navigation = ({ isAuthenticated, loading, logout, name }) => {
   );
 };
 
-Navigation.propTypes = {
+Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
+};
+
+Navbar.defaultProps = {
+  name: '',
 };
 
 const mapStateToProps = (state) => ({
@@ -98,4 +102,4 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading,
 });
 
-export default connect(mapStateToProps, { logout })(Navigation);
+export default connect(mapStateToProps, { logout })(Navbar);

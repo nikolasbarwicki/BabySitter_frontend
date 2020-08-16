@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import { faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
 import SittersFilter from './SittersFilter';
 import SittersItem from './SittersItem';
 import { getSitters, getFilteredSitters } from '../../actions/sitters';
@@ -70,8 +69,10 @@ SittersList.propTypes = {
   getSitters: PropTypes.func.isRequired,
   getFilteredSitters: PropTypes.func.isRequired,
   sitters: PropTypes.shape({
-    sitters: PropTypes.objectOf(PropTypes.shape({}).isRequired).isRequired,
-    loading: faPrescriptionBottle,
+    sitters: PropTypes.shape({
+      count: PropTypes.number.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,

@@ -63,9 +63,13 @@ const Modal = ({ role, deleteParentProfile, deleteSitterProfile }) => {
 };
 
 Modal.propTypes = {
-  role: PropTypes.string.isRequired,
+  role: PropTypes.string,
   deleteParentProfile: PropTypes.func.isRequired,
   deleteSitterProfile: PropTypes.func.isRequired,
+};
+
+Modal.defaultProps = {
+  role: null,
 };
 
 export default Modal;

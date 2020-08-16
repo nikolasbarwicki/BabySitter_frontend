@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { faDog, faUtensils, faBroom } from '@fortawesome/free-solid-svg-icons';
+import {
+  faDog,
+  faUtensils,
+  faBroom,
+  faChild,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { getJobById } from '../../actions/jobs';
@@ -83,11 +88,12 @@ const JobsProfile = ({
                 <div>
                   <h5 className="text-center">${profile.hourlyRate}.00/hr</h5>
                   <h6 className="mb-2 text-muted text-center">Hourly rate</h6>
-                  {isAuthenticated && role === 'parent' ? (
+                  {isAuthenticated && role === 'parent' && (
                     <p className="w-75 text-center mx-auto text-danger">
                       To contact this user, you need to change your user type.
                     </p>
-                  ) : (
+                  )}
+                  {isAuthenticated && role === 'sitter' && (
                     <>
                       <button
                         type="button"
@@ -105,11 +111,11 @@ const JobsProfile = ({
                       />
                     </>
                   )}
-                  {!isAuthenticated ? (
+                  {!isAuthenticated && (
                     <Link to="/login" className="btn btn-primary">
                       Login to see contact info
                     </Link>
-                  ) : null}
+                  )}
                 </div>
               </div>
             </div>
@@ -121,7 +127,7 @@ const JobsProfile = ({
           </div>
           <hr className="mt-2 mb-3" />
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 col-md-6">
               <h5>We need a babysitter comfortable with</h5>
               <ul className="list-group list-group-flush">
                 <li
@@ -165,6 +171,27 @@ const JobsProfile = ({
                     style={{ width: '20px' }}
                   />
                   Chores
+                </li>
+              </ul>
+            </div>
+            <div className="col-12 col-md-6">
+              <h5>Number of children</h5>
+              <ul className="list-group list-group-flush">
+                <li
+                  className={`list-group-item ${
+                    profile.comfortableWith.chores
+                      ? null
+                      : 'text-decoration-line-through'
+                  }`}
+                >
+                  <FontAwesomeIcon
+                    icon={faChild}
+                    className="mr-3"
+                    style={{ width: '20px' }}
+                  />
+                  {profile.numberOfChildren > 1
+                    ? `${profile.numberOfChildren} children`
+                    : `${profile.numberOfChildren} child`}
                 </li>
               </ul>
             </div>
@@ -221,23 +248,55 @@ const JobsProfile = ({
 JobsProfile.propTypes = {
   getJobById: PropTypes.func.isRequired,
   profile: PropTypes.shape({
-    profile: PropTypes.oneOfType([
-      'PropTypes.string.isRequired',
-      'PropTypes.number.isRequired',
-    ]).isRequired,
+    profile: PropTypes.shape({
+      location: PropTypes.shape({
+        city: PropTypes.string.isRequired,
+        street: PropTypes.string.isRequired,
+      }).isRequired,
+      description: PropTypes.string.isRequired,
+      numberOfChildren: PropTypes.number.isRequired,
+      ageOfChildren: PropTypes.shape({
+        baby: PropTypes.bool.isRequired,
+        toddler: PropTypes.bool.isRequired,
+        preschooler: PropTypes.bool.isRequired,
+        gradeschooler: PropTypes.bool.isRequired,
+        teenager: PropTypes.bool.isRequired,
+      }).isRequired,
+      hourlyRate: PropTypes.number.isRequired,
+      comfortableWith: PropTypes.shape({
+        pets: PropTypes.bool.isRequired,
+        cooking: PropTypes.bool.isRequired,
+        chores: PropTypes.bool.isRequired,
+      }).isRequired,
+      contactPhone: PropTypes.string.isRequired,
+      contactEmail: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
     loading: PropTypes.bool.isRequired,
-  }).isRequired,
+  }),
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     user: PropTypes.shape({
-      role: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+      role: PropTypes.string,
+    }),
+  }),
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+JobsProfile.defaultProps = {
+  profile: {},
+  auth: {
+    user: {
+      role: null,
+    },
+  },
 };
 
 const mapStateToProps = (state) => ({

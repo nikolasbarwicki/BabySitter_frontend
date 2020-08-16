@@ -57,12 +57,10 @@ const JobsList = ({ getJobs, jobs: { jobs, loading } }) => {
 
 JobsList.propTypes = {
   jobs: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
     jobs: PropTypes.shape({
-      data: PropTypes.arrayOf().isRequired,
       count: PropTypes.number.isRequired,
     }).isRequired,
-    count: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
   }).isRequired,
   getJobs: PropTypes.func.isRequired,
   location: PropTypes.shape({

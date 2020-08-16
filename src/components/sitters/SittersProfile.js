@@ -95,11 +95,12 @@ const SittersProfile = ({
                 <div>
                   <h5 className="text-center">${profile.hourlyRate}.00/hr</h5>
                   <h6 className="mb-2 text-muted text-center">Hourly rate</h6>
-                  {isAuthenticated && role === 'sitter' ? (
+                  {isAuthenticated && role === 'sitter' && (
                     <p className="w-75 text-center mx-auto text-danger">
                       To contact this user, you need to change your user type.
                     </p>
-                  ) : (
+                  )}
+                  {isAuthenticated && role === 'parent' && (
                     <>
                       <button
                         type="button"
@@ -117,11 +118,11 @@ const SittersProfile = ({
                       />
                     </>
                   )}
-                  {!isAuthenticated ? (
+                  {!isAuthenticated && (
                     <Link to="/login" className="btn btn-primary">
                       Login to see contact info
                     </Link>
-                  ) : null}
+                  )}
                 </div>
               </div>
             </div>
@@ -321,23 +322,67 @@ const SittersProfile = ({
 SittersProfile.propTypes = {
   getSitterById: PropTypes.func.isRequired,
   profile: PropTypes.shape({
-    profile: PropTypes.oneOfType([
-      'PropTypes.string.isRequired',
-      'PropTypes.number.isRequired',
-    ]).isRequired,
+    profile: PropTypes.shape({
+      age: PropTypes.number.isRequired,
+      location: PropTypes.shape({
+        city: PropTypes.string.isRequired,
+        street: PropTypes.string.isRequired,
+      }).isRequired,
+      dateOfBirth: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      experience: PropTypes.string.isRequired,
+      experienceAges: PropTypes.shape({
+        baby: PropTypes.bool.isRequired,
+        toddler: PropTypes.bool.isRequired,
+        preschooler: PropTypes.bool.isRequired,
+        gradeschooler: PropTypes.bool.isRequired,
+        teenager: PropTypes.bool.isRequired,
+      }).isRequired,
+      hourlyRate: PropTypes.number.isRequired,
+      skills: PropTypes.shape({
+        crafting: PropTypes.bool.isRequired,
+        drawing: PropTypes.bool.isRequired,
+        reading: PropTypes.bool.isRequired,
+        music: PropTypes.bool.isRequired,
+        language: PropTypes.bool.isRequired,
+        games: PropTypes.bool.isRequired,
+      }).isRequired,
+      comfortableWith: PropTypes.shape({
+        pets: PropTypes.bool.isRequired,
+        cooking: PropTypes.bool.isRequired,
+        chores: PropTypes.bool.isRequired,
+      }).isRequired,
+      contactPhone: PropTypes.string.isRequired,
+      contactEmail: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
     loading: PropTypes.bool.isRequired,
-  }).isRequired,
+  }),
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     user: PropTypes.shape({
-      role: PropTypes.string.isRequired,
+      role: PropTypes.string,
     }).isRequired,
-  }).isRequired,
+  }),
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+SittersProfile.defaultProps = {
+  profile: {
+    profile: {},
+  },
+  auth: {
+    user: {
+      role: {},
+    },
+  },
 };
 
 const mapStateToProps = (state) => ({
