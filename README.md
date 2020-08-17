@@ -1,68 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BabySitter App
 
-## Available Scripts
+BabySitter App is a community platform connecting parents with babysitters. It allows you to search for babysitters and babysitting jobs. To contact sitter or parent you have to register to get access to contact info. You can post your own profile to connect with other parents or sitters.
 
-In the project directory, you can run:
+### Live demo
 
-### `npm start`
+[💻 LINK](https://secure-meadow-81318.herokuapp.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+  <img width="600" src="https://i.ibb.co/qxz3x2b/projects5.png">
+</p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 📝General info
 
-### `npm test`
+## ⚙️Built with
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [React.js](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [redux-thunk](https://github.com/reduxjs/redux-thunk)
+- [axios](https://github.com/axios/axios)
+- [boostrap5](https://v5.getbootstrap.com)
+- [lodash](https://lodash.com/)
+- [custom express API](https://github.com/nikolasbarwicki/BabySitter_backend)
+- [ESLint](https://eslint.org/), [Husky](https://www.npmjs.com/package/husky), [Prettier](https://prettier.io/), [lint-staged](https://github.com/okonet/lint-staged)
 
-### `npm run build`
+## 🚀Setup
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To clone and run this application, you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com/)) installed on your computer. From your command line:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    $ git clone https://github.com/nikolasbarwicki/BabySitter_frontend
+    $ cd BabySitter_frontend
+    $ npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start app
 
-### `npm run eject`
+    $ npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Setup server-side
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    $ git clone https://github.com/nikolasbarwicki/BabySitter_backend
+    $ cd BabySitter_backend
+    $ npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    $ npm run dev
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Go to:
 
-## Learn More
+      http://localhost:3000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## ✅Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+A few of the things you can do with BabySitter App:
 
-### Code Splitting
+- view list of babysitters and babysitting jobs,
+- filter the search results by many properties (eq. location, distance from specific location, min/max hourly rate),
+- sort search results,
+- view users email and phone based on your role,
+- login/register and post your profile
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## To-do:
 
-### Analyzing the Bundle Size
+- [ ] fix UI issues on mobile,
+- [ ] add uploading avatars,
+- [ ] add liking profiles functionality,
+- [ ] add embedded map with locations of users,
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## 👁‍🗨Project status
 
-### Making a Progressive Web App
+This project is fully functional. Need some minor fixes. Further development will be based on To-do listed in previous section.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## 📘License
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License © [Nikolas Barwicki](https://github.com/nikolasbarwicki)
