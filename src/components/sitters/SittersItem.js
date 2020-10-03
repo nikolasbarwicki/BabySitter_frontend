@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SittersItem = ({ name, age, city, desc, id }) => {
   return (
-    <div
-      className="card mb-4 shadow-sm bg-light"
-      style={{ minHeight: '10rem' }}
-    >
+    <div className="card mb-4" style={{ minHeight: '10rem' }}>
       <div className="row g-0">
         <div className="col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
           <img

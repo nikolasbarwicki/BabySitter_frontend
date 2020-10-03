@@ -77,25 +77,25 @@ const Landing = ({ isAuthenticated, history: { push } }) => {
         </h3>
         <div className="col-6 col-lg-2">
           <div>
-            <FontAwesomeIcon icon={faChild} size="4x" color="#0d6efd" />
+            <FontAwesomeIcon icon={faChild} size="4x" color="#0052cc" />
             <h5 className="mt-3">Free for babysitters</h5>
           </div>
         </div>
         <div className="col-6 col-lg-2">
           <div>
-            <FontAwesomeIcon icon={faPiggyBank} size="4x" color="#0d6efd" />
+            <FontAwesomeIcon icon={faPiggyBank} size="4x" color="#0052cc" />
             <h5 className="mt-3">Affordable for parents</h5>
           </div>
         </div>
         <div className="col-6 col-lg-2">
           <div>
-            <FontAwesomeIcon icon={faGlobeEurope} size="4x" color="#0d6efd" />
+            <FontAwesomeIcon icon={faGlobeEurope} size="4x" color="#0052cc" />
             <h5 className="mt-3">Babysitters across England</h5>
           </div>
         </div>
         <div className="col-6 col-lg-2">
           <div>
-            <FontAwesomeIcon icon={faShieldAlt} size="4x" color="#0d6efd" />
+            <FontAwesomeIcon icon={faShieldAlt} size="4x" color="#0052cc" />
             <h5 className="mt-3">Trustworthy user verifications</h5>
           </div>
         </div>

@@ -9,7 +9,7 @@ const Navbar = ({ isAuthenticated, loading, logout, name }) => {
     <div className="btn-group d-flex">
       <button
         type="button"
-        className="btn btn-outline-light dropdown-toggle"
+        className="btn btn-primary dropdown-toggle"
         data-toggle="dropdown"
       >
         Hi, {name}{' '}
@@ -48,7 +48,7 @@ const Navbar = ({ isAuthenticated, loading, logout, name }) => {
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           YourBabySitter

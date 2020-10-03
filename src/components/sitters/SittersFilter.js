@@ -100,9 +100,9 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
 
   return (
     <div className="col-12 col-sm-4">
-      <h4>Filters</h4>
+      <h4 className="mb-4">Filters</h4>
       <form onSubmit={(e) => onSubmit(e)}>
-        <div className="row g-3">
+        <div className="row g-3 mb-4">
           <div className="col-12 col-lg-6">
             <label htmlFor="city" className="form-label">
               City
@@ -166,7 +166,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           </div>
         </div>
         <div className="mt-3">
-          Experience with age(s)
+          <span className="font-weight-bold">Experience with age(s)</span>
           <div className="form-check mt-2">
             <input
               className="form-check-input"
@@ -180,7 +180,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               baby
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -193,7 +193,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               toddler
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -206,7 +206,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               preschooler
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -219,7 +219,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               gradeschooler
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -249,7 +249,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           />
         </div>
         <div className="mb-3">
-          Skills
+          <span className="font-weight-bold">Skills</span>
           <div className="form-check mt-2">
             <input
               className="form-check-input"
@@ -263,7 +263,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               crafting
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -276,7 +276,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               drawing
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -289,7 +289,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               reading
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -302,7 +302,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               music
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -315,7 +315,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               language
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -330,7 +330,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
           </div>
         </div>
         <div className="mb-3">
-          Comfortable with
+          <span className="font-weight-bold">Comfortable with</span>
           <div className="form-check mt-2">
             <input
               className="form-check-input"
@@ -344,7 +344,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               pets
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -357,7 +357,7 @@ const SittersFilter = ({ getFilteredSitters, history: { push } }) => {
               cooking
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check mt-2">
             <input
               className="form-check-input"
               type="checkbox"

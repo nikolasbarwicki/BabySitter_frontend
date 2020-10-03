@@ -64,9 +64,9 @@ const SittersProfile = ({
           </div>
           <div className="row">
             <div className="col-12 col-md-8">
-              <div className="card mb-4 shadow-sm" style={{ height: '10rem' }}>
-                <div className="row">
-                  <div className="col-md-4 col-lg-3 align-self-center col-4 d-none d-sm-block">
+              <div className="card mb-4 " style={{ height: '10rem' }}>
+                <div className="d-flex d-flex-row align-items-center">
+                  <div className="mr-4">
                     <img
                       src="https://thumbs.dreamstime.com/b/creative-illustration-default-avatar-profile-placeholder-isolated-background-art-design-grey-photo-blank-template-mockup-144849704.jpg"
                       alt="gosciu"
@@ -74,22 +74,21 @@ const SittersProfile = ({
                       className="rounded float-left m-2"
                     />
                   </div>
-                  <div className="col-sm-8 col-md-8 col-lg-9 align-self-center col-12">
-                    <div className="">
-                      <h5 className="">
-                        {profile.user.name}, {profile.age}
-                      </h5>
-                      <h6 className="mb-2 text-muted">
-                        Babysitter {profile.location.city}
-                      </h6>
-                    </div>
+
+                  <div>
+                    <h5 className="">
+                      {profile.user.name}, {profile.age}
+                    </h5>
+                    <h6 className="mb-2 text-muted">
+                      Babysitter {profile.location.city}
+                    </h6>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-12 col-md-4">
               <div
-                className="card d-flex-column align-items-center justify-content-center shadow-sm"
+                className="card d-flex-column align-items-center justify-content-center "
                 style={{ height: '10rem' }}
               >
                 <div>
@@ -128,8 +127,8 @@ const SittersProfile = ({
             </div>
           </div>
 
-          <div className="row">
-            <h3>Hello, I&apos;m {profile.user.name}!</h3>
+          <div className="row my-3">
+            <h2 className="my-3">Hello, I&apos;m {profile.user.name}!</h2>
             <p>{profile.description}</p>
           </div>
           <hr className="mt-2 mb-3" />
@@ -138,10 +137,10 @@ const SittersProfile = ({
           <hr className="mt-2 mb-3" />
           <div className="row">
             <div className="col-12 col-sm-6">
-              <h5>Skills</h5>
+              <h5 className="mb-3">Skills</h5>
               <ul className="list-group list-group-flush">
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.crafting
                       ? null
                       : 'text-decoration-line-through'
@@ -155,7 +154,7 @@ const SittersProfile = ({
                   Crafting
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.drawing
                       ? null
                       : 'text-decoration-line-through'
@@ -169,7 +168,7 @@ const SittersProfile = ({
                   Drawing
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.reading
                       ? null
                       : 'text-decoration-line-through'
@@ -183,7 +182,7 @@ const SittersProfile = ({
                   Reading
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.music ? null : 'text-decoration-line-through'
                   }`}
                 >
@@ -195,7 +194,7 @@ const SittersProfile = ({
                   Music
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.language
                       ? null
                       : 'text-decoration-line-through'
@@ -209,7 +208,7 @@ const SittersProfile = ({
                   Language
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.skills.games ? null : 'text-decoration-line-through'
                   }`}
                 >
@@ -223,10 +222,10 @@ const SittersProfile = ({
               </ul>
             </div>
             <div className="col-12 col-sm-6">
-              <h5>I&apos;m comfortable with</h5>
+              <h5 className="mb-3">I&apos;m comfortable with</h5>
               <ul className="list-group list-group-flush">
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.comfortableWith.pets
                       ? null
                       : 'text-decoration-line-through'
@@ -240,7 +239,7 @@ const SittersProfile = ({
                   Pets
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.comfortableWith.cooking
                       ? null
                       : 'text-decoration-line-through'
@@ -254,7 +253,7 @@ const SittersProfile = ({
                   Cooking
                 </li>
                 <li
-                  className={`list-group-item ${
+                  className={`list-group-item rounded mb-3 ${
                     profile.comfortableWith.chores
                       ? null
                       : 'text-decoration-line-through'
@@ -270,40 +269,40 @@ const SittersProfile = ({
               </ul>
             </div>
             <hr className="mt-2 mb-3" />
-            <div className="row">
+            <div className="col-12 my-3">
               <div className="col-12 mb-4">
-                <h5>Experience with age(s)</h5>
-                <ul className="w-100 list-group list-group-horizontal flex-md-row flex-column mt-3">
+                <h5 className="mb-2">Experience with age(s)</h5>
+                <ul className="col-12 list-group flex-md-row flex-column">
                   <li
-                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item rounded  m-2 flex-fill text-center ${
                       profile.experienceAges.baby ? 'active' : null
                     }`}
                   >
                     Baby
                   </li>
                   <li
-                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item rounded  m-2 flex-fill text-center ${
                       profile.experienceAges.toddler ? 'active' : null
                     }`}
                   >
                     Toddler
                   </li>
                   <li
-                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item rounded  m-2 flex-fill text-center ${
                       profile.experienceAges.preschooler ? 'active' : null
                     }`}
                   >
                     Preschooler
                   </li>
                   <li
-                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item rounded  m-2 flex-fill text-center ${
                       profile.experienceAges.gradeschooler ? 'active' : null
                     }`}
                   >
                     Gradeschooler
                   </li>
                   <li
-                    className={`font-weight-bold p-3 list-group-item flex-fill text-center ${
+                    className={`font-weight-bold p-3 list-group-item rounded  m-2 flex-fill text-center ${
                       profile.experienceAges.teenager ? 'active' : null
                     }`}
                   >

@@ -26,8 +26,8 @@ const SittersList = ({
       <div className="row">
         <SittersFilter />
         <div className="col-12 col-sm-8">
-          <h4>Find babysitter </h4>
-          <p>
+          <h2>Find babysitter </h2>
+          <p className="my-4">
             Are you looking for a suitable babysitter? Babysits has a large
             overview of babysitters, with {sitters.count || 'many'} babysitters
             currently available matching your search criteria. Start contacting

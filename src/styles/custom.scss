@@ -1,0 +1,37 @@
+$border-radius: 1rem;
+$border-radius-sm: 0.5rem;
+$primary: #0052cc;
+$dark: #e3eaf7;
+$body-bg: #f4f5f7;
+$body-color: #091e42;
+$border-radius-lg: 0.7rem;
+
+$font-family-sans-serif: 'Roboto';
+$headings-font-weight: 700;
+
+// Navbar
+$navbar-brand-font-size: 1.5rem;
+$navbar-brand-padding-y: 0.75rem;
+$navbar-brand-margin-right: 4rem;
+
+// Forms
+$input-border-width: 1px;
+$input-btn-padding-y: 0.5rem;
+$input-btn-padding-x: 1.25rem;
+$form-label-font-weight: 600;
+
+// Cards
+$card-border-width: 0px;
+$card-bg: #fff;
+$card-spacer-y: 3rem;
+
+// Breadcrumbs
+$breadcrumb-padding-y: 1rem;
+$breadcrumb-padding-x: 2rem;
+$breadcrumb-bg: #fff;
+
+// List group
+$list-group-item-padding-y: 1rem;
+$list-group-border-width: 0px;
+
+@import '../../node_modules/bootstrap/scss/bootstrap';

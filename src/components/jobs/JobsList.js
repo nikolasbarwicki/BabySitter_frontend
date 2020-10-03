@@ -16,8 +16,8 @@ const JobsList = ({ getJobs, jobs: { jobs, loading } }) => {
       <div className="row">
         <JobsFilter />
         <div className="col-12 col-sm-8">
-          <h4>Find babysitting job</h4>
-          <p>
+          <h2>Find babysitting job</h2>
+          <p className="my-4">
             Are you looking for a babysitting job? Babysits has a large overview
             of babysitting jobs, with {jobs.count || 'many'} jobs currently
             available matching your search criteria. Find yourself a babysitting
