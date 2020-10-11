@@ -4,7 +4,7 @@ BabySitter App is a community platform connecting parents with babysitters. It a
 
 ### Live demo
 
-[💻 LINK](https://secure-meadow-81318.herokuapp.com/)
+[💻 LINK](https://dry-sea-75324.herokuapp.com/)
 
 <p align="center">
   <img width="600" src="https://i.ibb.co/qxz3x2b/projects5.png">
